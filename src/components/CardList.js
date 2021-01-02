@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import { Box, CircularProgress } from "@material-ui/core";
 import CardMenu from "./CardMenu";
 import DialogForm from "./DialogForm";
 import Axios from "axios";
 
 const CardList = () => {
+  const classes = useStyles();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true)
   useEffect(() => {
@@ -23,7 +25,7 @@ const CardList = () => {
   return (
     <>
       <Box>
-      {loading ? <CircularProgress size={24} /> :
+      {loading ? <CircularProgress size={60} className={classes.loading} /> :
         data && data.map((item, index) => <CardMenu key={index} data={item} />)}
         {/* <CardMenu />
         <CardMenu />
@@ -37,5 +39,12 @@ const CardList = () => {
     </>
   );
 };
+
+const useStyles = makeStyles((theme) => ({
+  loading: {
+    alignSelf: "center",
+    justifySelf: "center"
+  },
+}));
 
 export default CardList;
