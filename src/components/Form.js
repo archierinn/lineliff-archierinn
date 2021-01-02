@@ -64,7 +64,7 @@ const Form = () => {
           />
         </Grid>
         <Grid item xs={4}>
-          <Button fullWidth size="large" onClick={handleQuantityAdd} className={classes.button}>
+          <Button fullWidth size="large" onClick={handleQuantityAdd} disabled={editedItem.quantity === 50} className={classes.button}>
             <AddCircleOutlineIcon />
           </Button>
         </Grid>

@@ -16,7 +16,7 @@ const CardMenu = (props) => {
       id: data.item_id,
       name: data.item_name,
       type: data.item_type,
-      price: data.item_price,
+      price: data.item_price
     };
     setEditedItem(editItem);
     setTimeout(() => setOpen(true), 100);

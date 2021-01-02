@@ -81,6 +81,7 @@ const DialogForm = () => {
     <Dialog fullWidth={true} maxWidth="lg" open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h5">{editedItem.name}</Typography>
+        <Typography variant="h6">{editedItem.price}</Typography>
       </DialogTitle>
       <DialogContent>
         <Form />

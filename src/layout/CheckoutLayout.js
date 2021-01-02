@@ -103,7 +103,7 @@ const CheckoutLayout = () => {
           className={classes.button}
           onClick={handleConfirm}
         >
-          {loading ? <CircularProgress size={24} /> : "Confirm Order"}
+          {loading ? <CircularProgress size={24} color="white" /> : "Confirm Order"}
         </Button>
       </Box>
       <Notifications error={error} />
