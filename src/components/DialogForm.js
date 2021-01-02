@@ -13,7 +13,7 @@ import { FormContext } from "../provider/FormProvider";
 const DialogForm = () => {
   const { openDialog, item, items, ids, notification } = useContext(FormContext);
   const [open, setOpen] = openDialog;
-  const [editedItem] = item;
+  const [editedItem, setEditedItem] = item;
   const [itemArray, setItemArray] = items;
   const [idArray, setIdArray] = ids;
   const [status, setStatus] = notification;
@@ -47,6 +47,14 @@ const DialogForm = () => {
     }
     setItemArray(array);
     setOpen(false);
+    setEditedItem({
+      id: "",
+      name: "",
+      type: "",
+      quantity: 0,
+      price: 0,
+      desc: "",
+    });
     setTimeout(() => {
       setStatus({...status, open: true, message})
     }, 100)

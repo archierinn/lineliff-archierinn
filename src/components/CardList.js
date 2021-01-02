@@ -48,8 +48,11 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
-    width: "100%"
+    width: "100%",
   },
+  loading: {
+    marginTop: 8
+  }
 }));
 
 export default CardList;

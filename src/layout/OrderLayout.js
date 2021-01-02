@@ -26,7 +26,7 @@ const OrderLayout = () => {
 
   // if (query.get(""))
 
-  useEffect(() => {
+  /* useEffect(() => {
     // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID }).then(() => {
       if (liff.isLoggedIn()) {
       if (profile.id === "") {
@@ -39,7 +39,7 @@ const OrderLayout = () => {
       }
     }
     // })
-  }, []);
+  }, []); */
 
   const handleNext = () => {
     history.push("/order/checkout");

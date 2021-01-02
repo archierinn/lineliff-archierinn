@@ -15,7 +15,7 @@ const ReviewLayout = () => {
     if (length >= 3) {
       const mod = length % 3;
       if (mod > 0) {
-        return num.substring(0, mod) + "." + num.substring(mod);
+        return num.substring(0, mod+1) + "." + num.substring(mod+1);
       } else if (length / 3 === 1) {
         return num.substring(0, 1) + "." + num.substring(1);
       } else {

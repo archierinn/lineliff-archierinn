@@ -32,6 +32,9 @@ const NavBar = () => {
   useEffect(() => {
     if (liff.isLoggedIn()) {
       setIsLoggedIn(true)
+      liff.getProfile().then((res) => {
+        setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
+      })
     }
     /* liff.getProfile().then((res) => {
       setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
@@ -160,6 +163,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
+    width: "30vw",
     padding: 8,
   },
   avatar: {
