@@ -7,7 +7,7 @@ const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 
 const Notifications = (props) => {
   const { notification } = useContext(FormContext);
-  const [openNotification, setOpenNotification] = notification;
+  const [status, setStatus] = notification;
   // const [open, setOpen] = useState(false)
 
   /* useEffect(() => {
@@ -16,11 +16,11 @@ const Notifications = (props) => {
     }) */
 
   const handleClose = () => {
-    setOpenNotification(false);
+    setStatus({...status, open: false});
   };
   return (
     <Snackbar
-      open={openNotification}
+      open={status.open}
       autoHideDuration={5000}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       onClose={handleClose}
@@ -32,7 +32,7 @@ const Notifications = (props) => {
         >
           {props.error.status
             ? props.error.message
-            : "Sukses! " + props.successMessage}
+            : "Sukses! " + status.message}
         </Alert>
       }
     </Snackbar>
