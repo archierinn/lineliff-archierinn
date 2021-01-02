@@ -35,7 +35,7 @@ export const LoginProvider = (props) => {
         token,
       }); */
     }
-  }, []);
+  }, [profile, liff.isLoggedIn()]);
 
   return (
     <LoginContext.Provider
