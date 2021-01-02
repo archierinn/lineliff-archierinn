@@ -14,10 +14,10 @@ export const LoginProvider = (props) => {
   });
   // const { liff, isLoggedIn, ready, error } = useLiff();
   // const liff = LineLiff;
+  liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
     if (liff.isLoggedIn()) {
       setIsLoggedIn(true);
       let profiles = { ...profile };
@@ -28,7 +28,6 @@ export const LoginProvider = (props) => {
           img: res.pictureUrl,
           userId: res.userId,
         };
-        console.log(res)
       });
       const token = liff.getIDToken();
       setProfile({
@@ -36,7 +35,7 @@ export const LoginProvider = (props) => {
         token,
       });
     }
-  }, [isLoggedIn, profile]);
+  }, [profile]);
 
   return (
     <LoginContext.Provider

@@ -7,6 +7,7 @@ import Axios from "axios";
 import { FormContext } from "../provider/FormProvider";
 import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
+import liff from "@line/liff";
 
 const CheckoutLayout = () => {
   const classes = useStyles();
@@ -14,7 +15,7 @@ const CheckoutLayout = () => {
   const [itemArray] = items;
   const [total] = totals;
   const [status, setStatus] = notification;
-  const { profiles, liff } = useContext(LoginContext);
+  const { profiles } = useContext(LoginContext);
   const [profile] = profiles;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ status: false, message: "" });

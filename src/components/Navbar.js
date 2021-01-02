@@ -17,13 +17,14 @@ import {
 import MenuIcon from "@material-ui/icons/Menu";
 import { FormContext } from "../provider/FormProvider";
 import { LoginContext } from "../provider/LoginProvider";
+import liff from "@line/liff";
 
 const NavBar = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const dialog = createRef();
   const { history } = useContext(FormContext);
-  const { profiles, liff, login } = useContext(LoginContext);
+  const { profiles, login } = useContext(LoginContext);
   const [isLoggedIn, setIsLoggedIn] = login;
   const [profile] = profiles;
   const isInClient = liff.isInClient();

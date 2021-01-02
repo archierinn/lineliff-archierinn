@@ -7,6 +7,12 @@ import { FormContext } from "../provider/FormProvider";
 import Axios from "axios";
 import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
+import liff from "@line/liff";
+import { useLocation } from "react-router-dom";
+
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+}
 
 const OrderLayout = () => {
   const classes = useStyles();
@@ -15,14 +21,18 @@ const OrderLayout = () => {
   const [total] = totals;
   const [itemArray] = items;
   const [profile, setProfile] = profiles;
+  const token = liff.getIDToken();
+  const query = useQuery();
+
+  // if (query.get(""))
 
   useEffect(() => {
-    if (profile.id === "" && profile.token !== "") {
-      Axios.post("/login", profile.token).then((res) => {
+    if (profile.id === "" && token !== "") {
+      Axios.post("/login", token).then((res) => {
         setProfile({ ...profile, id: res.data.data });
       });
     }
-  }, [profile, setProfile]);
+  }, [profile, setProfile, token]);
 
   const handleNext = () => {
     history.push("/order/checkout");
