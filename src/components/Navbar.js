@@ -26,8 +26,11 @@ const NavBar = () => {
   const { history } = useContext(FormContext);
   const { profiles, login } = useContext(LoginContext);
   const [isLoggedIn, setIsLoggedIn] = login;
-  const [profile] = profiles;
+  const [profile, setProfile] = profiles;
   const isInClient = liff.isInClient();
+  liff.getProfile().then((res) => {
+    setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
+  })
 
   const handleClose = (event) => {
     if (

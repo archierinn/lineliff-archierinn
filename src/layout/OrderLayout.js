@@ -27,8 +27,8 @@ const OrderLayout = () => {
   // if (query.get(""))
 
   useEffect(() => {
-    if (profile.id === "" && token !== "") {
-      Axios.post("/login", token).then((res) => {
+    if (profile.id === "" && profile.userId !== "") {
+      Axios.post("/login", profile.userId).then((res) => {
         setProfile({ ...profile, id: res.data.data });
       });
     }
