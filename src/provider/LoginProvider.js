@@ -23,7 +23,7 @@ export const LoginProvider = (props) => {
       // let profiles = { ...profile };
       liff.ready.then(() => {
         return liff.getProfile().then((res) => {
-          Axios.post("/login", res.userId).then((resp) => {
+          Axios.post("/login", { token: res.userId }).then((resp) => {
             setProfile({
               ...profile,
               id: resp.data.data,

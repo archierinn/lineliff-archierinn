@@ -12,20 +12,22 @@ const Form = () => {
   const [total, setTotal] = totals;
 
   const handleQuantityAdd = (event) => {
-    const quantity = Number(total.quantity) + Number(editedItem.quantity) + 1;
+    const quantity = Number(editedItem.quantity) + 1;
     const editedObject = { ...editedItem, quantity };
     const price = total.price + (editedItem.price * quantity);
+    const quantityTotal = Number(total.quantity) + 1;
     setEditedItem(editedObject);
-    setTotal({...total, price, quantity})
+    setTotal({...total, price, quantity: quantityTotal})
   };
 
   const handleQuantityRemove = (event) => {
-    const quantity = Number(total.quantity) - Number(editedItem.quantity) - 1;
+    const quantity = Number(editedItem.quantity) - 1;
     const editedObject = { ...editedItem, quantity };
     const price = total.price - (editedItem.price * quantity);
+    const quantityTotal = Number(total.quantity) - 1;
     // const editedObject = { ...editedItem, quantity: Number(editedItem.quantity) - 1 };
     setEditedItem(editedObject);
-    setTotal({...total, price, quantity})
+    setTotal({...total, price, quantity: quantityTotal})
   };
 
   const handleDesc = (event) => {

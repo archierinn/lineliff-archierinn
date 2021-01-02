@@ -28,18 +28,20 @@ const DialogForm = () => {
   const handleClose = () => {
     setOpen(false);
     if (editedItem.quantity > 0) {
-    const quantity = Number(total.quantity) - Number(editedItem.quantity);
+    const quantity = total.quantity > 0 ? Number(total.quantity) - Number(editedItem.quantity) : 0;
     const price = total.price - (editedItem.price * quantity);
-    setTotal({...total, price, quantity})
+    setTotal({...total, price, quantity});
     }
-    setEditedItem({
-      id: "",
-      name: "",
-      type: "",
-      quantity: 0,
-      price: 0,
-      desc: "",
-    });
+    setTimeout(() => {
+      setEditedItem({
+        id: "",
+        name: "",
+        type: "",
+        quantity: 0,
+        price: 0,
+        desc: "",
+      });
+    }, 100)
   };
 
   const handleAdd = () => {
