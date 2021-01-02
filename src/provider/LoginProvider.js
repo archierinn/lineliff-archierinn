@@ -21,7 +21,7 @@ export const LoginProvider = (props) => {
   useEffect(() => {
     if (profile.name === "") {
       // let profiles = { ...profile };
-      liff.ready().then(() => {
+      liff.ready.then(() => {
         return liff.getProfile().then((res) => {
           Axios.post("/login", res.userId).then((resp) => {
             setProfile({
