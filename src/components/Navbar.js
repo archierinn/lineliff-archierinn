@@ -26,7 +26,7 @@ const NavBar = () => {
   const { history } = useContext(FormContext);
   const { profiles, login } = useContext(LoginContext);
   const [isLoggedIn, setIsLoggedIn] = login;
-  const [profile] = profiles;
+  const [profile, setProfile] = profiles;
   const isInClient = liff.isInClient();
 
   useEffect(() => {
