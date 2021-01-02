@@ -17,25 +17,25 @@ export const LoginProvider = (props) => {
   liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (liff.isLoggedIn()) {
       setIsLoggedIn(true);
-      let profiles = { ...profile };
+      // let profiles = { ...profile };
       liff.getProfile().then((res) => {
-        profiles = {
-          ...profiles,
+        setProfile({
+          ...profile,
           name: res.displayName,
           img: res.pictureUrl,
           userId: res.userId,
-        };
+        });
       });
-      const token = liff.getIDToken();
-      setProfile({
+      //const token = liff.getIDToken();
+      /* setProfile({
         ...profiles,
         token,
-      });
+      }); */
     }
-  }, [profile]); */
+  }, [profile]);
 
   return (
     <LoginContext.Provider

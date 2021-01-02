@@ -6,12 +6,14 @@ import Axios from "axios";
 
 const CardList = () => {
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     if (!data) {
       Axios.get("/item")
         .then((res) => {
           if (res.data.status) {
             setData(res.data.data);
+            setLoading(false);
           }
         })
         .catch((error) => console.log(error.message));
@@ -21,7 +23,8 @@ const CardList = () => {
   return (
     <>
       <Box>
-        {data && data.map((item, index) => <CardMenu key={index} data={item} />)}
+      {loading ? <CircularProgress size={24} /> :
+        data && data.map((item, index) => <CardMenu key={index} data={item} />)}
         {/* <CardMenu />
         <CardMenu />
         <CardMenu />

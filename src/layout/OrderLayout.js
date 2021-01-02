@@ -27,10 +27,13 @@ const OrderLayout = () => {
   // if (query.get(""))
 
   useEffect(() => {
-    if (profile.id === "" && profile.userId !== "") {
-      Axios.post("/login", profile.userId).then((res) => {
-        setProfile({ ...profile, id: res.data.data });
-      });
+    if (profile.id === "") {
+      liff.getProfile().then((res) => {
+        return Axios.post("/login", res.userId).then((res) => {
+          setProfile({ ...profile, id: res.data.data });
+          return
+        });
+      })
     }
   }, []);
 
