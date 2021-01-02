@@ -29,14 +29,14 @@ const NavBar = () => {
   const [profile, setProfile] = profiles;
   const isInClient = liff.isInClient();
 
-  /* useEffect(() => {
+  useEffect(() => {
     liff.getProfile().then((res) => {
       setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
       if (liff.isLoggedIn()) {
         setIsLoggedIn(true)
       }
     })
-  }, []) */
+  }, [])
 
   const handleClose = (event) => {
     if (
