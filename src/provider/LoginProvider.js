@@ -18,14 +18,19 @@ export const LoginProvider = (props) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      const profiles = liff.getProfile();
+      let profiles = { ...profile };
+      liff.getProfile().then((res) => {
+        profiles = {
+          ...profiles,
+          name: res.displayName,
+          img: res.pictureUrl,
+          userId: res.userId,
+        };
+      });
       const token = liff.getIDToken();
       setProfile({
-        ...profile,
-        name: profiles.displayName,
-        img: profiles.pictureUrl,
+        ...profiles,
         token,
-        userId: profiles.userId,
       });
     }
   }, [isLoggedIn, liff, profile]);

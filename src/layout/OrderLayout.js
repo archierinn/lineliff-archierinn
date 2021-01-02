@@ -17,7 +17,7 @@ const OrderLayout = () => {
   const [profile, setProfile] = profiles;
 
   useEffect(() => {
-    if (profile.id === "") {
+    if (profile.id === "" && profile.token !== "") {
       Axios.post("/login", profile.token).then((res) => {
         setProfile({ ...profile, id: res.data.data });
       });

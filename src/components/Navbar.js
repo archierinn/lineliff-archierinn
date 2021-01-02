@@ -25,6 +25,7 @@ const NavBar = () => {
   const { history } = useContext(FormContext);
   const { profiles, liff, isLoggedIn } = useContext(LoginContext);
   const [profile] = profiles;
+  const isInClient = liff.isInClient()
 
   const handleClose = (event) => {
     if (
@@ -81,7 +82,7 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Order Makan
           </Typography>
-          {liff.isInClient ? null : isLoggedIn ? (
+          {isInClient ? null : isLoggedIn ? (
             <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
@@ -112,12 +113,12 @@ const NavBar = () => {
           <ListItem button key="order" onClick={handleOrder}>
             <ListItemText primary="Order" />
           </ListItem>
-          {liff.isInClient ? (
+          {isInClient ? (
             <ListItem button key="openWindow" onClick={handleOpenWindow}>
               <ListItemText primary="Open in external browser" />
             </ListItem>
           ) : null}
-          {liff.isInClient ? (
+          {isInClient ? (
             <ListItem button key="closeWindow" onClick={handleCloseWindow}>
               <ListItemText primary="Close app" />
             </ListItem>
