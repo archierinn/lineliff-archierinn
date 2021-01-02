@@ -108,7 +108,7 @@ const NavBar = () => {
           )}
         </Toolbar>
       </Paper>
-      <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose}>
+      <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose} className={classes.drawer}>
         <Box className={classes.profile}>
           {liff.isLoggedIn() ? (
             <>
@@ -170,6 +170,9 @@ const useStyles = makeStyles((theme) => ({
   displayName: {
     padding: 4,
   },
+  drawer: {
+    width: "30vw"
+  }
 }));
 
 export default NavBar;

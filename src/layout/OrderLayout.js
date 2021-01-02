@@ -28,6 +28,7 @@ const OrderLayout = () => {
 
   useEffect(() => {
     // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID }).then(() => {
+      if (liff.isLoggedIn()) {
       if (profile.id === "") {
         liff.getProfile().then((res) => {
           return Axios.post("/login", res.userId).then((res) => {
@@ -36,6 +37,7 @@ const OrderLayout = () => {
           });
         })
       }
+    }
     // })
   }, []);
 
