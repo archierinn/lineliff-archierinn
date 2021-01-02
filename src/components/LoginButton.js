@@ -8,7 +8,7 @@ const LoginButton = () => {
   const classes = useStyles();
 
   useEffect(() => {
-    liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
+    // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
   }, [])
   // const { liff } = useLiff();
   return (
