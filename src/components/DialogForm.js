@@ -29,7 +29,7 @@ const DialogForm = () => {
     setOpen(false);
     if (editedItem.quantity > 0) {
     const quantity = total.quantity > 0 ? Number(total.quantity) - Number(editedItem.quantity) : 0;
-    const price = total.price - (editedItem.price * quantity);
+    const price = total.price > 0 ? Number(total.price) - (editedItem.price * editedItem.quantity) : 0;
     setTotal({...total, price, quantity});
     }
     setTimeout(() => {

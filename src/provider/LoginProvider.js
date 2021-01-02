@@ -23,7 +23,7 @@ export const LoginProvider = (props) => {
       // let profiles = { ...profile };
       liff.ready.then(() => {
         return liff.getProfile().then((res) => {
-          Axios.post("/login", { token: res.userId }).then((resp) => {
+          Axios.post("/login", { token: getRandomNumber(32) }).then((resp) => {
             setProfile({
               ...profile,
               id: resp.data.data,
@@ -39,6 +39,15 @@ export const LoginProvider = (props) => {
       })
     }
   }, [profile]);
+
+  const getRandomNumber = (length) => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let random = "";
+    for (let i = 0; i < length; i++) {
+      random += chars.charAt(Math.floor(Math.random() * chars.length + 1));
+    }
+    return random
+  };
 
   return (
     <LoginContext.Provider
