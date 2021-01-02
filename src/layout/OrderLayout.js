@@ -18,7 +18,7 @@ const OrderLayout = () => {
 
   useEffect(() => {
     if (profile.id === "") {
-      Axios.post("/login").then((res) => {
+      Axios.post("/login", profile.token).then((res) => {
         setProfile({ ...profile, id: res.data.data });
       });
     }

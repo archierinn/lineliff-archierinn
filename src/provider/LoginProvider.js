@@ -9,22 +9,32 @@ export const LoginProvider = (props) => {
     name: "",
     img: "",
     token: "",
-    userId: ""
+    userId: "",
   });
   const { liff, isLoggedIn, ready } = useLiff();
 
   useEffect(() => {
-    if (isLoggedIn) {
-        const profiles = liff.getProfile()
-        const token = liff.getIDToken()
-        setProfile({...profile, name: profiles.displayName, img: profiles.pictureUrl, token, userId: profiles.userId})
+    if (ready) {
+      if (isLoggedIn) {
+        const profiles = liff.getProfile();
+        const token = liff.getIDToken();
+        setProfile({
+          ...profile,
+          name: profiles.displayName,
+          img: profiles.pictureUrl,
+          token,
+          userId: profiles.userId,
+        });
+      }
     }
-  }, [ready, isLoggedIn, liff, profile])
+  }, [ready, isLoggedIn, liff, profile]);
 
   return (
     <LoginContext.Provider
       value={{
-        profiles: [profile, setProfile]
+        profiles: [profile, setProfile],
+        liff,
+        isLoggedIn
       }}
     >
       {props.children}
