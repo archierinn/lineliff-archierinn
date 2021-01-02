@@ -25,7 +25,7 @@ const NavBar = () => {
   const { history } = useContext(FormContext);
   const { profiles, liff, isLoggedIn } = useContext(LoginContext);
   const [profile] = profiles;
-  const isInClient = liff.isInClient()
+  const isInClient = liff.isInClient();
 
   const handleClose = (event) => {
     if (
