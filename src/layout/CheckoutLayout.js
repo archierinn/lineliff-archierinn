@@ -39,7 +39,7 @@ const CheckoutLayout = () => {
             if (res.data.status) {
               setLoading(false);
               setStatus({...status, open: true, message: "Data berhasil disimpan"})
-              if (liff.isInClient()) {
+              if (liff.isInClient) {
                 setTimeout(() => {
                   liff.closeWindow();
                 }, 3000);
