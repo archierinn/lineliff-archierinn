@@ -22,7 +22,7 @@ const OrderLayout = () => {
   const [itemArray] = items;
   const [profile, setProfile] = profiles;
   // const token = liff.getIDToken();
-  const query = useQuery();
+  // const query = useQuery();
 
   // if (query.get(""))
 
