@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Box, Paper, Typography } from "@material-ui/core";
 // import { useLiff } from "react-liff";
@@ -6,6 +6,10 @@ import liff from "@line/liff";
 
 const LoginButton = () => {
   const classes = useStyles();
+
+  /* useEffect(() => {
+    liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
+  }, []) */
   // const { liff } = useLiff();
   return (
     <Box mx="auto">
