@@ -1,11 +1,12 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Box, Paper, Typography } from "@material-ui/core";
-import { useLiff } from "react-liff";
+// import { useLiff } from "react-liff";
+import liff from "@line/liff";
 
 const LoginButton = () => {
   const classes = useStyles();
-  const { liff } = useLiff();
+  // const { liff } = useLiff();
   return (
     <Box mx="auto">
       <Paper elevation={3} className={classes.root}>
@@ -16,7 +17,7 @@ const LoginButton = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={liff.login}
+          onClick={liff.login({redirectUri: "https://lineliff-archierinn.herokuapp.com/order"})}
         >
           LOGIN
         </Button>
