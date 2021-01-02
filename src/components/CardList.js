@@ -24,7 +24,7 @@ const CardList = () => {
 
   return (
     <>
-      <Box className={classes.box}>
+      <Box>
       {loading ? <CircularProgress size={60} className={classes.loading} /> :
         data && data.map((item, index) => <CardMenu key={index} data={item} />)}
         {/* <CardMenu />

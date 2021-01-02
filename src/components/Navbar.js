@@ -25,7 +25,7 @@ const NavBar = () => {
   const dialog = createRef();
   const { history } = useContext(FormContext);
   const { profiles, login } = useContext(LoginContext);
-  // const [isLoggedIn, setIsLoggedIn] = login;
+  const [isLoggedIn, setIsLoggedIn] = login;
   const [profile] = profiles;
   const isInClient = liff.isInClient();
 
