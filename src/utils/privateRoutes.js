@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useLiff } from "react-liff";
+import { LoginContext } from "../provider/LoginProvider";
 
 const PrivateRoute = ({ children, ...rest }) => {
-  const { isLoggedIn } = useLiff();
+  const { isLoggedIn } = useContext(LoginContext);
   return (
     <Route
       {...rest}

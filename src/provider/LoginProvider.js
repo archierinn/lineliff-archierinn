@@ -11,9 +11,11 @@ export const LoginProvider = (props) => {
     token: "",
     userId: "",
   });
-  const { liff, isLoggedIn, ready } = useLiff();
+  const { liff, isLoggedIn, ready, error } = useLiff();
 
   useEffect(() => {
+    console.log(ready)
+    console.log(error)
     if (ready) {
       if (isLoggedIn) {
         const profiles = liff.getProfile();
@@ -27,7 +29,7 @@ export const LoginProvider = (props) => {
         });
       }
     }
-  }, [ready, isLoggedIn, liff, profile]);
+  }, [ready, isLoggedIn, liff, profile, error]);
 
   return (
     <LoginContext.Provider

@@ -5,7 +5,6 @@ import NavBarCheckout from "../components/NavbarCheckout";
 import ReviewLayout from "./ReviewLayout";
 import Axios from "axios";
 import { FormContext } from "../provider/FormProvider";
-import { useLiff } from "react-liff";
 import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
 
@@ -15,9 +14,8 @@ const CheckoutLayout = () => {
   const [itemArray] = items;
   const [total] = totals;
   const [status, setStatus] = notification;
-  const { profiles } = useContext(LoginContext);
+  const { profiles, liff } = useContext(LoginContext);
   const [profile] = profiles;
-  const { liff } = useLiff();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ status: false, message: "" });
 

@@ -15,7 +15,6 @@ import {
   Divider,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import { useLiff } from "react-liff";
 import { FormContext } from "../provider/FormProvider";
 import { LoginContext } from "../provider/LoginProvider";
 
@@ -23,9 +22,8 @@ const NavBar = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const dialog = createRef();
-  const { liff, isLoggedIn } = useLiff();
   const { history } = useContext(FormContext);
-  const { profiles } = useContext(LoginContext);
+  const { profiles, liff, isLoggedIn } = useContext(LoginContext);
   const [profile] = profiles;
 
   const handleClose = (event) => {
