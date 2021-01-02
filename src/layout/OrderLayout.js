@@ -21,7 +21,7 @@ const OrderLayout = () => {
   const [total] = totals;
   const [itemArray] = items;
   const [profile, setProfile] = profiles;
-  const token = liff.getIDToken();
+  // const token = liff.getIDToken();
   const query = useQuery();
 
   // if (query.get(""))
@@ -32,7 +32,7 @@ const OrderLayout = () => {
         setProfile({ ...profile, id: res.data.data });
       });
     }
-  }, [profile, setProfile, token]);
+  }, []);
 
   const handleNext = () => {
     history.push("/order/checkout");

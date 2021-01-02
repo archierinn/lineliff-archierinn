@@ -1,4 +1,4 @@
-import React, { createRef, useContext, useState } from "react";
+import React, { createRef, useContext, useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Toolbar,
@@ -28,9 +28,15 @@ const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = login;
   const [profile, setProfile] = profiles;
   const isInClient = liff.isInClient();
-  liff.getProfile().then((res) => {
-    setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
-  })
+
+  useEffect(() => {
+    liff.getProfile().then((res) => {
+      setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
+      if (liff.isLoggedIn()) {
+        setIsLoggedIn(true)
+      }
+    })
+  }, [])
 
   const handleClose = (event) => {
     if (
