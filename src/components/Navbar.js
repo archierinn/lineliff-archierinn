@@ -23,7 +23,8 @@ const NavBar = () => {
   const [open, setOpen] = useState(false);
   const dialog = createRef();
   const { history } = useContext(FormContext);
-  const { profiles, liff, isLoggedIn } = useContext(LoginContext);
+  const { profiles, liff, login } = useContext(LoginContext);
+  const [isLoggedIn, setIsLoggedIn] = login;
   const [profile] = profiles;
   const isInClient = liff.isInClient();
 
@@ -48,6 +49,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     liff.logout();
+    setIsLoggedIn(false)
     history.replace("/login");
   };
 

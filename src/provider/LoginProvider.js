@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 // import { useLiff } from "react-liff";
-import LineLiff from "@line/liff";
+import liff from "@line/liff";
 
 export const LoginContext = createContext();
 
@@ -13,13 +13,13 @@ export const LoginProvider = (props) => {
     userId: "",
   });
   // const { liff, isLoggedIn, ready, error } = useLiff();
-  const liff = LineLiff;
+  // const liff = LineLiff;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
-    setIsLoggedIn(liff.isLoggedIn());
-    if (isLoggedIn) {
+    if (liff.isLoggedIn()) {
+      setIsLoggedIn(true);
       let profiles = { ...profile };
       liff.getProfile().then((res) => {
         profiles = {
@@ -28,6 +28,7 @@ export const LoginProvider = (props) => {
           img: res.pictureUrl,
           userId: res.userId,
         };
+        console.log(res)
       });
       const token = liff.getIDToken();
       setProfile({
@@ -35,14 +36,14 @@ export const LoginProvider = (props) => {
         token,
       });
     }
-  }, [isLoggedIn, liff, profile]);
+  }, [isLoggedIn, profile]);
 
   return (
     <LoginContext.Provider
       value={{
         profiles: [profile, setProfile],
         liff,
-        isLoggedIn,
+        login: [isLoggedIn, setIsLoggedIn],
       }}
     >
       {props.children}
