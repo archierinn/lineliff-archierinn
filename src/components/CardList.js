@@ -24,7 +24,7 @@ const CardList = () => {
 
   return (
     <>
-      <Box>
+      <Box className={classes.box}>
       {loading ? <CircularProgress size={60} className={classes.loading} /> :
         data && data.map((item, index) => <CardMenu key={index} data={item} />)}
         {/* <CardMenu />
@@ -41,9 +41,12 @@ const CardList = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  loading: {
-    alignSelf: "center",
-    justifySelf: "center"
+  box: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%"
   },
 }));
 

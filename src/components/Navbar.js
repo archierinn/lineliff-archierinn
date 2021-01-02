@@ -25,7 +25,7 @@ const NavBar = () => {
   const dialog = createRef();
   const { history } = useContext(FormContext);
   const { profiles, login } = useContext(LoginContext);
-  const [isLoggedIn, setIsLoggedIn] = login;
+  // const [isLoggedIn, setIsLoggedIn] = login;
   const [profile] = profiles;
   const isInClient = liff.isInClient();
 
@@ -97,7 +97,7 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Order Makan
           </Typography>
-          {isInClient ? null : isLoggedIn ? (
+          {isInClient ? null : liff.isLoggedIn() ? (
             <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
@@ -110,7 +110,7 @@ const NavBar = () => {
       </Paper>
       <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose}>
         <Box className={classes.profile}>
-          {isLoggedIn ? (
+          {liff.isLoggedIn() ? (
             <>
               <Avatar src={profile.img} className={classes.avatar}></Avatar>
               <Typography variant="h6" className={classes.displayName}>

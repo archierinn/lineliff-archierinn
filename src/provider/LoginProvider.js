@@ -35,7 +35,7 @@ export const LoginProvider = (props) => {
         token,
       }); */
     }
-  }, [profile]);
+  }, []);
 
   return (
     <LoginContext.Provider
