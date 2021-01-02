@@ -89,7 +89,7 @@ const DialogForm = () => {
         <Button onClick={handleClose} color="primary">
           Cancel
         </Button>
-        <Button onClick={handleAdd} color="primary">
+        <Button onClick={handleAdd} disabled={editedItem.quantity === 0} color="primary">
           Add
         </Button>
       </DialogActions>

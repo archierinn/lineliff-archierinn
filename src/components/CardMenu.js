@@ -8,7 +8,7 @@ const CardMenu = (props) => {
   const { openDialog, item } = useContext(FormContext);
   const [, setOpen] = openDialog;
   const [editedItem, setEditedItem] = item;
-  const { item_name, item_img, item_desc } = props.data;
+  const { item_name, item_img, item_desc, item_price } = props.data;
 
   const handleOpen = (data) => {
     const editItem = {
@@ -74,7 +74,7 @@ const CardMenu = (props) => {
               paragraph={true}
               className={classes.title}
             >
-              {`Rp${formatNumber(Number(item.price))}`}
+              {`Rp${formatNumber(Number(item_price))}`}
             </Typography>
           </Box>
         </Box>

@@ -62,12 +62,14 @@ const ReviewLayout = () => {
               <Typography variant="body1" className={classes.itemText}>
                 {`${item.name} x ${formatNumber(Number(item.quantity))}`}
               </Typography>
-              <Typography variant="body2" className={classes.totalText}>
-                Notes:
-              </Typography>
-              <Typography variant="body2" className={classes.descText}>
-                {item.desc}
-              </Typography>
+              {item.desc !== "" && <>
+                <Typography variant="body2" className={classes.totalText}>
+                  Notes:
+                </Typography>
+                <Typography variant="body2" className={classes.descText}>
+                  {item.desc}
+                </Typography>
+              </>}
             </Grid>
             <Grid item xs={4}>
               <Typography variant="body1" className={classes.priceText}>
