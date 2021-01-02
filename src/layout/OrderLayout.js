@@ -27,16 +27,16 @@ const OrderLayout = () => {
   // if (query.get(""))
 
   useEffect(() => {
-    liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID }).then(() => {
+    // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID }).then(() => {
       if (profile.id === "") {
-        return liff.getProfile().then((res) => {
+        liff.getProfile().then((res) => {
           return Axios.post("/login", res.userId).then((res) => {
             setProfile({ ...profile, id: res.data.data });
             return
           });
         })
       }
-    })
+    // })
   }, []);
 
   const handleNext = () => {
