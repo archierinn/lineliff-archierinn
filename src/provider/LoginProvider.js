@@ -14,9 +14,11 @@ export const LoginProvider = (props) => {
   });
   // const { liff, isLoggedIn, ready, error } = useLiff();
   const liff = LineLiff;
-  const isLoggedIn = liff.isLoggedIn();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
+    setIsLoggedIn(liff.isLoggedIn());
     if (isLoggedIn) {
       let profiles = { ...profile };
       liff.getProfile().then((res) => {
