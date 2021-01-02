@@ -47,8 +47,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "stretch",
     width: "100%",
+    flex: 1
   },
   loading: {
     marginTop: 8

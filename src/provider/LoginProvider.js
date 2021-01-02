@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 // import { useLiff } from "react-liff";
-// import liff from "@line/liff";
+import liff from "@line/liff";
+import Axios from "axios";
 
 export const LoginContext = createContext();
 
@@ -17,20 +18,27 @@ export const LoginProvider = (props) => {
   // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  /* useEffect(() => {
-    if (liff.isLoggedIn()) {
-      setIsLoggedIn(true);
+  useEffect(() => {
+    if (profile.name === "") {
       // let profiles = { ...profile };
-      liff.getProfile().then((res) => {
-        setProfile({
-          ...profile,
-          name: res.displayName,
-          img: res.pictureUrl,
-          userId: res.userId,
-        });
-      });
+      liff.ready().then(() => {
+        return liff.getProfile().then((res) => {
+          Axios.post("/login", res.userId).then((resp) => {
+            setProfile({
+              ...profile,
+              id: resp.data.data,
+              name: res.displayName,
+              img: res.pictureUrl,
+              userId: res.userId,
+            });
+            return true
+          })
+          setIsLoggedIn(true);
+          return true
+        }).catch((err) => console.log(err));
+      })
     }
-  }, [profile]); */
+  }, [profile]);
 
   return (
     <LoginContext.Provider

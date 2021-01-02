@@ -11,12 +11,13 @@ import Form from "./Form";
 import { FormContext } from "../provider/FormProvider";
 
 const DialogForm = () => {
-  const { openDialog, item, items, ids, notification } = useContext(FormContext);
+  const { openDialog, item, items, ids, notification, totals } = useContext(FormContext);
   const [open, setOpen] = openDialog;
   const [editedItem, setEditedItem] = item;
   const [itemArray, setItemArray] = items;
   const [idArray, setIdArray] = ids;
   const [status, setStatus] = notification;
+  const [total, setTotal] = totals;
 
   /* useEffect(() => {
     if (open) {
@@ -26,6 +27,19 @@ const DialogForm = () => {
 
   const handleClose = () => {
     setOpen(false);
+    if (editedItem.quantity > 0) {
+    const quantity = Number(total.quantity) - Number(editedItem.quantity);
+    const price = total.price - (editedItem.price * quantity);
+    setTotal({...total, price, quantity})
+    }
+    setEditedItem({
+      id: "",
+      name: "",
+      type: "",
+      quantity: 0,
+      price: 0,
+      desc: "",
+    });
   };
 
   const handleAdd = () => {
@@ -55,6 +69,7 @@ const DialogForm = () => {
       price: 0,
       desc: "",
     });
+    // setTotal({...total, })
     setTimeout(() => {
       setStatus({...status, open: true, message})
     }, 100)

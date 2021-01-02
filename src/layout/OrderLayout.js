@@ -7,7 +7,7 @@ import { FormContext } from "../provider/FormProvider";
 import Axios from "axios";
 import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
-import liff from "@line/liff";
+// import liff from "@line/liff";
 import { useLocation } from "react-router-dom";
 
 const useQuery = () => {

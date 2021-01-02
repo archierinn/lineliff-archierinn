@@ -28,21 +28,15 @@ const NavBar = () => {
   const [isLoggedIn, setIsLoggedIn] = login;
   const [profile, setProfile] = profiles;
   const isInClient = liff.isInClient();
-
-  useEffect(() => {
+  // const isLoggedIn = liff.isLoggedIn();
+  /* useEffect(() => {
     if (liff.isLoggedIn()) {
       setIsLoggedIn(true)
       liff.getProfile().then((res) => {
         setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
       })
     }
-    /* liff.getProfile().then((res) => {
-      setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
-      if (liff.isLoggedIn()) {
-        setIsLoggedIn(true)
-      }
-    }) */
-  }, [])
+  }, []) */
 
   const handleClose = (event) => {
     if (
@@ -60,12 +54,12 @@ const NavBar = () => {
 
   const handleLogin = () => {
     liff.login();
-    history.replace("/order");
+    // history.replace("/order");
   };
 
   const handleLogout = () => {
     liff.logout();
-    setIsLoggedIn(false)
+    setIsLoggedIn(false);
     history.replace("/login");
   };
 
@@ -100,20 +94,20 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Order Makan
           </Typography>
-          {isInClient ? null : liff.isLoggedIn() ? (
+          {isInClient ? null : isLoggedIn ? (
             <Button color="inherit" onClick={handleLogout}>
               Logout
             </Button>
           ) : (
-            <Button color="inherit" onClick={handleLogin}>
-              Login
-            </Button>
-          )}
+              <Button color="inherit" onClick={handleLogin}>
+                Login
+              </Button>
+            )}
         </Toolbar>
       </Paper>
       <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose} className={classes.drawer}>
         <Box className={classes.profile}>
-          {liff.isLoggedIn() ? (
+          {isLoggedIn ? (
             <>
               <Avatar src={profile.img} className={classes.avatar}></Avatar>
               <Typography variant="h6" className={classes.displayName}>
@@ -121,10 +115,10 @@ const NavBar = () => {
               </Typography>
             </>
           ) : (
-            <Typography variant="h5" className={classes.displayName}>
-              AR Drink
-            </Typography>
-          )}
+              <Typography variant="h5" className={classes.displayName}>
+                AR Drink
+              </Typography>
+            )}
         </Box>
         <Divider />
         <List>
@@ -165,6 +159,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "30vw",
     padding: 8,
+    [theme.breakpoints.down('sm')]: {
+      width: "50vw"
+    },
   },
   avatar: {
     width: theme.spacing(5),

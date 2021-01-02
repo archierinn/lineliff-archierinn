@@ -38,6 +38,8 @@ const ReviewLayout = () => {
         }
         return output;
       }
+    } else {
+      return num;
     }
   };
 
@@ -50,6 +52,7 @@ const ReviewLayout = () => {
       {itemArray.length > 0 &&
         itemArray.map((item, index) => (
           <Grid
+            key={index}
             container
             wrap="noWrap"
             spacing={2}
