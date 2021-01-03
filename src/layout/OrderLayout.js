@@ -18,12 +18,6 @@ const OrderLayout = () => {
   const [itemArray, setItemArray] = items;
   const [, setIdArray] = ids;
 
-  useEffect(() => {
-    setTotal({price: 0, quantity: 0});
-    setItemArray([]);
-    setIdArray([]);
-  }, [])
-
   const handleNext = () => {
     history.push("/order/checkout");
   };
