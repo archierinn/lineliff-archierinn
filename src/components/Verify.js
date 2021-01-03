@@ -39,13 +39,14 @@ const Verify = () => {
                 return true
             }).catch((err) => console.log(err)) */
             const token = liff.getAccessToken();
-            if (token) {
+            setTimeout(() => history.replace("/order"), 1000);
+            /* if (token) {
             axiosLine.get("/verify", { params: { access_token: token }}).then((resp) => {
                 if (resp.status === 200) {
                     history.push("/order");
                 }
                 }).catch((err) => console.log(err))
-            }
+            } */
         } else {
             //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
             setTimeout(() => history.replace("/order"), 1000);

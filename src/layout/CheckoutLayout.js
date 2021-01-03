@@ -118,6 +118,7 @@ const CheckoutLayout = () => {
   };
 
   const handleSendMessage = (idOrder, profile, items, total) => {
+    try {
     const template = JSON.parse(templateReceipt);
     template.body.contents[0].contents[1].text = "#" + idOrder;
     template.body.contents[2].contents[1].text = profile;
@@ -168,6 +169,9 @@ const CheckoutLayout = () => {
     template.body.contents[6].contents[1].text = total.quantity.toString();
     template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
     return template;
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const formatNumber = (number) => {
