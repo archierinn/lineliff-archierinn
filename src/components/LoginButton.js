@@ -19,7 +19,7 @@ const LoginButton = () => {
     <Box mx="auto">
       <Paper elevation={3} className={classes.root}>
         <Typography variant="h5" className={classes.title}>
-          Please login to proceed
+          Silakan masuk untuk melanjutkan
         </Typography>
         <Button
           variant="contained"
@@ -27,7 +27,7 @@ const LoginButton = () => {
           size="large"
           onClick={handleLogin}
         >
-          LOGIN
+          MASUK
         </Button>
       </Paper>
     </Box>

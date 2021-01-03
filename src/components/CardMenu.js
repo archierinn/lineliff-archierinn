@@ -100,7 +100,7 @@ const CardMenu = (props) => {
             color="primary"
             onClick={() => handleOpen(props.data)}
           >
-            Add to Cart
+            Tambah ke Keranjang
           </Button>
         </Box>
       </Paper>

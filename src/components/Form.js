@@ -38,7 +38,7 @@ const Form = () => {
   return (
     <form noValidate autoComplete="off">
       <Typography variant="body1">
-            Quantity
+            Jumlah
           </Typography>
       <Grid
         container
@@ -77,7 +77,7 @@ const Form = () => {
         onChange={handleQuantity}
       /> */}
       <TextField
-        label="Additional request"
+        label="Permintaan tambahan"
         variant="outlined"
         fullWidth={true}
         multiline

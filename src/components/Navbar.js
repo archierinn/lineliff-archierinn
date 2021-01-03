@@ -92,15 +92,15 @@ const NavBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Order Minum
+            Pesan Minum
           </Typography>
           {isInClient ? null : isLoggedIn ? (
             <Button color="inherit" onClick={handleLogout}>
-              Logout
+              Keluar
             </Button>
           ) : (
               <Button color="inherit" onClick={handleLogin}>
-                Login
+                Masuk
               </Button>
             )}
         </Toolbar>
@@ -121,18 +121,18 @@ const NavBar = () => {
             )}
         </Box>
         <Divider />
-        <List>
+        <List className={classes.list}>
           <ListItem button key="order" onClick={handleOrder}>
-            <ListItemText primary="Order" />
+            <ListItemText primary="Pesan" />
           </ListItem>
           {isInClient ? (
             <ListItem button key="openWindow" onClick={handleOpenWindow}>
-              <ListItemText primary="Open in external browser" />
+              <ListItemText primary="Buka di peramban eksternal" />
             </ListItem>
           ) : null}
           {isInClient ? (
             <ListItem button key="closeWindow" onClick={handleCloseWindow}>
-              <ListItemText primary="Close app" />
+              <ListItemText primary="Tutup aplikasi" />
             </ListItem>
           ) : null}
           {/* {["Order", "Open in external browser"].map((text, index) => (
@@ -171,6 +171,9 @@ const useStyles = makeStyles((theme) => ({
   displayName: {
     padding: 4,
   },
+  list: {
+    textAlign: "center"
+  }
 }));
 
 export default NavBar;

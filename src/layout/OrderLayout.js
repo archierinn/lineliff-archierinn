@@ -62,7 +62,7 @@ const OrderLayout = () => {
       <Box className={classes.tabBar}>
         <Box className={classes.total}>
           <Typography variant="h6" className={classes.totalText}>
-            Total Amount
+            Jumlah Harga
           </Typography>
           <Typography variant="h6" className={classes.priceText}>
             {`Rp${formatNumber(Number(total.price))}`}
@@ -75,7 +75,7 @@ const OrderLayout = () => {
           onClick={handleNext}
           disabled={itemArray.length === 0}
         >
-          Next
+          Lanjut
         </Button>
       </Box>
       <Notifications error={{status: false}} />

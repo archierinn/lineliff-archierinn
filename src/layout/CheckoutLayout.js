@@ -44,7 +44,7 @@ const CheckoutLayout = () => {
             },
             {
               type: 'flex',
-              altText: 'Receipt',
+              altText: 'Nota',
               contents: result
             }
           ]).then(() => {
@@ -216,7 +216,7 @@ const CheckoutLayout = () => {
           className={classes.button}
           onClick={handleConfirm}
         >
-          {loading ? <CircularProgress size={24} color="white" /> : "Confirm Order"}
+          {loading ? <CircularProgress size={24} color="white" /> : "Konfirmasi Pesanan"}
         </Button>
       </Box>
       <Notifications error={error} />

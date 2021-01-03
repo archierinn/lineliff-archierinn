@@ -9,7 +9,7 @@ const NoMatch = () => {
       <Box mx="auto">
         <Paper elevation={3} className={classes.root}>
           <Typography variant="h5" className={classes.title}>
-            404 PAGE NOT FOUND
+            404 LAMAN TIDAK DITEMUKAN
           </Typography>
         </Paper>
       </Box>

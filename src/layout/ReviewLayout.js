@@ -46,7 +46,7 @@ const ReviewLayout = () => {
   return (
     <Box className={classes.root}>
       <Typography variant="h4" className={classes.reviewText}>
-        Review your order
+        Tinjau pesanan Anda
       </Typography>
       <Divider />
       {itemArray.length > 0 &&
@@ -64,7 +64,7 @@ const ReviewLayout = () => {
               </Typography>
               {item.desc !== "" && <>
                 <Typography variant="body2" className={classes.totalText}>
-                  Notes:
+                  Catatan:
                 </Typography>
                 <Typography variant="body2" className={classes.descText}>
                   {item.desc}
@@ -136,7 +136,7 @@ const ReviewLayout = () => {
       <Grid container wrap="noWrap" spacing={2} className={classes.itemList}>
         <Grid item xs={8}>
           <Typography variant="body1" className={classes.itemText}>
-            ITEMS
+            JUMLAH BARANG
           </Typography>
         </Grid>
         <Grid item xs={4}>
@@ -148,7 +148,7 @@ const ReviewLayout = () => {
       <Grid container wrap="noWrap" spacing={2} className={classes.itemList}>
         <Grid item xs={4}>
           <Typography variant="body1" className={classes.totalText}>
-            TOTAL
+            JUMLAH HARGA
           </Typography>
         </Grid>
         <Grid item xs={8}>

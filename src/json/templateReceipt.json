@@ -8,7 +8,7 @@
 				"layout": "horizontal",
 				"contents": [{
 						"type": "text",
-						"text": "RECEIPT",
+						"text": "NOTA",
 						"size": "sm",
 						"color": "#1DB446",
 						"weight": "bold"
@@ -34,7 +34,7 @@
 				"layout": "horizontal",
 				"contents": [{
 						"type": "text",
-						"text": "Customer:",
+						"text": "Pelanggan:",
 						"size": "sm",
 						"flex": 0
 					},
@@ -68,7 +68,7 @@
 				"margin": "xxl",
 				"contents": [{
 						"type": "text",
-						"text": "ITEMS",
+						"text": "JUMLAH BARANG",
 						"size": "sm",
 						"color": "#555555",
 						"flex": 1
@@ -88,7 +88,7 @@
 				"layout": "horizontal",
 				"contents": [{
 						"type": "text",
-						"text": "TOTAL",
+						"text": "JUMLAH HARGA",
 						"size": "sm",
 						"color": "#555555",
 						"flex": 1

@@ -29,7 +29,7 @@ const NavBarCheckout = () => {
           <ArrowBack />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-          Checkout
+          Konfirmasi
         </Typography>
       </Toolbar>
     </Paper>

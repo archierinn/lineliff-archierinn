@@ -124,10 +124,10 @@ const DialogForm = () => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          Cancel
+          Batal
         </Button>
         <Button onClick={handleAdd} disabled={editedItem.quantity === 0} color="primary">
-          Add
+          Simpan
         </Button>
       </DialogActions>
     </Dialog>
