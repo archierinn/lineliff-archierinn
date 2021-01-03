@@ -2,6 +2,7 @@ import Axios from "axios";
 import React, { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FormContext } from "../provider/FormProvider";
+import qs from "qs";
 
 const axiosLine = Axios.create({
     baseURL: "https://api.line.me/oauth2/v2.1/"
@@ -17,14 +18,14 @@ const Verify = () => {
 
     useEffect(() => {
         if (query.get("code")) {
-            const body = {
+            const body = qs.stringify({
                 grant_type: "authorization_code",
                 code: query.get("code"),
                 redirect_uri: "https://lineliff-archierinn.herokuapp.com/verify",
                 client_id: process.env.REACT_APP_LINE_CLIENT_ID,
                 client_secret: process.env.REACT_APP_LINE_CLIENT_SECRET
-            }
-            axiosLine.post("/token", null, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}, params: body}).then((res) => {
+            })
+            axiosLine.post("/token", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
                 // sessionStorage.setItem("token", res.data.access_token)
                 if (res.status === 200) {
                 return axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
@@ -38,7 +39,7 @@ const Verify = () => {
             }).catch((err) => console.log(err))
         } else {
             //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
-            history.push("/order");
+            setTimeout(() => history.replace("/order"), 1000);
         }
     }, []);
     return (
