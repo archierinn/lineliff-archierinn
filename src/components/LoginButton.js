@@ -12,7 +12,7 @@ const LoginButton = () => {
   }, []) */
   // const { liff } = useLiff();
   const handleLogin = () => {
-    liff.login({ redirectUri: "https://lineliff-archierinn.herokuapp.com/verify"});
+    liff.login();
   }
 
   return (

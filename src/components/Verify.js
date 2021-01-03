@@ -15,7 +15,7 @@ const Verify = () => {
     const query = useQuery();
     const { history } = useContext(FormContext);
 
-    useEffect(() => {
+    // useEffect(() => {
         if (query.get("code") !== "") {
             const body = {
                 grant_type: "authorization_code",
@@ -26,16 +26,20 @@ const Verify = () => {
             }
             axiosLine.post("/token", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
                 // sessionStorage.setItem("token", res.data.access_token)
-                axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
-                    if (resp.status.ok) {
-                        history.replace("/order")
-                    }
-                })
+                if (res.status === 200) {
+                return axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
+                        if (resp.status === 200) {
+                            history.replace("/order");
+                        }
+                        return true
+                    })
+                }
+                return true
             }).catch((err) => console.log(err))
         } else {
-            history.replace("/order")
+            history.replace("/order");
         }
-    }, [])
+    // }, []);
     return (
         <>
         </>
