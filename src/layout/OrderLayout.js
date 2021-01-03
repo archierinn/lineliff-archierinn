@@ -5,11 +5,6 @@ import NavBar from "../components/Navbar";
 import CardList from "../components/CardList";
 import { FormContext } from "../provider/FormProvider";
 import Notifications from "../components/Notifications";
-import { useLocation } from "react-router-dom";
-
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-}
 
 const OrderLayout = () => {
   const classes = useStyles();

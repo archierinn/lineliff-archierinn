@@ -24,7 +24,7 @@ const Verify = () => {
                 client_id: process.env.REACT_APP_LINE_CLIENT_ID,
                 client_secret: process.env.REACT_APP_LINE_CLIENT_SECRET
             }
-            axiosLine.post("/token", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
+            axiosLine.post("/token", null, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}, params: body}).then((res) => {
                 // sessionStorage.setItem("token", res.data.access_token)
                 if (res.status === 200) {
                 return axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
@@ -38,7 +38,7 @@ const Verify = () => {
             }).catch((err) => console.log(err))
         } else {
             //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
-            history.replace("/order");
+            history.push("/order");
         }
     }, []);
     return (
