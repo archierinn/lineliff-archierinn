@@ -53,7 +53,7 @@ const NavBar = () => {
   };
 
   const handleLogin = () => {
-    liff.login();
+    liff.login({ redirectUri: "https://lineliff-archierinn.herokuapp.com/verify"});
     // history.replace("/order");
   };
 

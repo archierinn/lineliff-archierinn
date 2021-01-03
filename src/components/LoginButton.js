@@ -11,6 +11,10 @@ const LoginButton = () => {
     liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID })
   }, []) */
   // const { liff } = useLiff();
+  const handleLogin = () => {
+    liff.login({ redirectUri: "https://lineliff-archierinn.herokuapp.com/verify"});
+  }
+
   return (
     <Box mx="auto">
       <Paper elevation={3} className={classes.root}>
@@ -21,7 +25,7 @@ const LoginButton = () => {
           variant="contained"
           color="primary"
           size="large"
-          onClick={liff.login}
+          onClick={handleLogin}
         >
           LOGIN
         </Button>
