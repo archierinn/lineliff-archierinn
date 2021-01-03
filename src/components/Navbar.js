@@ -75,7 +75,6 @@ const NavBar = () => {
   };
 
   const handleCloseWindow = () => {
-    liff.logout();
     liff.closeWindow();
   };
 

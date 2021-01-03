@@ -55,7 +55,6 @@ const CheckoutLayout = () => {
               setTotal({price: 0, quantity: 0});
               return setTimeout(() => {
                 // if (isInClient) {
-                liff.logout();
                 liff.closeWindow();
                 // }
               }, 1000);
