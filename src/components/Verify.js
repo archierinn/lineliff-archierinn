@@ -1,10 +1,10 @@
 import Axios from "axios";
 import React, { useContext, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { FormContext } from "../provider/FormProvider";
 
 const axiosLine = Axios.create({
-    baseURL: "https://api.line.me/v2/oauth/"
+    baseURL: "https://api.line.me/oauth2/v2.1/"
 });
 
 const useQuery = () => {
@@ -15,8 +15,8 @@ const Verify = () => {
     const query = useQuery();
     const { history } = useContext(FormContext);
 
-    // useEffect(() => {
-        if (query.get("code") !== "") {
+    useEffect(() => {
+        if (query.get("code")) {
             const body = {
                 grant_type: "authorization_code",
                 code: query.get("code"),
@@ -24,7 +24,7 @@ const Verify = () => {
                 client_id: process.env.REACT_APP_LINE_CLIENT_ID,
                 client_secret: process.env.REACT_APP_LINE_CLIENT_SECRET
             }
-            axiosLine.post("/accessToken", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
+            axiosLine.post("/token", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
                 // sessionStorage.setItem("token", res.data.access_token)
                 if (res.status === 200) {
                 return axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
@@ -37,9 +37,10 @@ const Verify = () => {
                 return true
             }).catch((err) => console.log(err))
         } else {
-            history.push("/order");
+            //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
+            history.replace("/order");
         }
-    // }, []);
+    }, []);
     return (
         <>
         </>
