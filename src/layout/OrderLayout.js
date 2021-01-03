@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, Box, Typography } from "@material-ui/core";
 import NavBar from "../components/Navbar";
@@ -8,10 +8,9 @@ import Notifications from "../components/Notifications";
 
 const OrderLayout = () => {
   const classes = useStyles();
-  const { totals, items, ids, history } = useContext(FormContext);
-  const [total, setTotal] = totals;
-  const [itemArray, setItemArray] = items;
-  const [, setIdArray] = ids;
+  const { totals, items, history } = useContext(FormContext);
+  const [total] = totals;
+  const [itemArray] = items;
 
   const handleNext = () => {
     history.push("/order/checkout");
@@ -23,7 +22,7 @@ const OrderLayout = () => {
     if (length >= 3) {
       const mod = length % 3;
       if (mod > 0) {
-        return num.substring(0, mod+1) + "." + num.substring(mod+1);
+        return num.substring(0, mod + 1) + "." + num.substring(mod + 1);
       } else if (length / 3 === 1) {
         return num.substring(0, 1) + "." + num.substring(1);
       } else {
@@ -78,7 +77,7 @@ const OrderLayout = () => {
           Lanjut
         </Button>
       </Box>
-      <Notifications error={{status: false}} />
+      <Notifications error={{ status: false }} />
     </>
   );
 };

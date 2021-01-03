@@ -15,7 +15,7 @@ const CheckoutLayout = () => {
   const { items, ids, totals, notification, history } = useContext(FormContext);
   const [itemArray, setItemArray] = items;
   const [total, setTotal] = totals;
-  const [idArray, setIdArray] = ids;
+  const [, setIdArray] = ids;
   const [status, setStatus] = notification;
   const { profiles } = useContext(LoginContext);
   const [profile] = profiles;
@@ -36,45 +36,63 @@ const CheckoutLayout = () => {
       .then((res) => {
         if (res.data.status) {
           if (isInClient) {
-          const result = handleSendMessage(orderNumber, profile.name, itemArray, total);
-          return liff.sendMessages([
-            {
-              type: 'text',
-              text: 'Pelanggan ' + profile.name +',\n\nTerima kasih sudah memesan. Berikut nota pemesanan Anda'
-            },
-            {
-              type: 'flex',
-              altText: 'Nota',
-              contents: result
-            }
-          ]).then(() => {
-              setLoading(false);
-              setStatus({...status, open: true, message: "Data berhasil disimpan"});
-              setItemArray([]);
-              setIdArray([]);
-              setTotal({price: 0, quantity: 0});
-              return setTimeout(() => {
-                // if (isInClient) {
-                liff.closeWindow();
-                // }
-              }, 1000);
-            })
+            const result = handleSendMessage(
+              orderNumber,
+              profile.name,
+              itemArray,
+              total
+            );
+            return liff
+              .sendMessages([
+                {
+                  type: "text",
+                  text:
+                    "Pelanggan " +
+                    profile.name +
+                    ",\n\nTerima kasih sudah memesan. Berikut nota pemesanan Anda",
+                },
+                {
+                  type: "flex",
+                  altText: "Nota",
+                  contents: result,
+                },
+              ])
+              .then(() => {
+                setLoading(false);
+                setStatus({
+                  ...status,
+                  open: true,
+                  message: "Data berhasil disimpan",
+                });
+                setItemArray([]);
+                setIdArray([]);
+                setTotal({ price: 0, quantity: 0 });
+                setTimeout(() => {
+                  liff.closeWindow();
+                }, 500);
+              });
           } else {
-          return Axios.get(
-            "/pushorder/" + profile.userId + "?id=" + res.data.data
-          ).then((res) => {
-            if (res.data.status) {
-              setLoading(false);
-              setStatus({...status, open: true, message: "Data berhasil disimpan"});
-              setItemArray([]);
-              setIdArray([]);
-              setTotal({price: 0, quantity: 0});
-              history.replace("/order")
-            } else {
-              handleError();
-              return;
-            }
-          });
+            return Axios.get(
+              "/pushorder/" + profile.userId + "?id=" + res.data.data
+            ).then((res) => {
+              if (res.data.status) {
+                setLoading(false);
+                setStatus({
+                  ...status,
+                  open: true,
+                  message: "Data berhasil disimpan",
+                });
+                setItemArray([]);
+                setIdArray([]);
+                setTotal({ price: 0, quantity: 0 });
+                setTimeout(() => {
+                  history.replace("/order");
+                }, 500);
+              } else {
+                handleError();
+                return;
+              }
+            });
           }
         } else {
           handleError();
@@ -95,7 +113,7 @@ const CheckoutLayout = () => {
       message = "Gagal! Terjadi galat. Silakan coba lagi.";
     }
     setError({ status: true, message });
-    setStatus({...status, open: true})
+    setStatus({ ...status, open: true });
   };
 
   const getOrderNumber = (length) => {
@@ -119,51 +137,58 @@ const CheckoutLayout = () => {
     const array = [];
     items.forEach((item) => {
       const price = Number(item.price) * Number(item.quantity);
-      const arrayItem = [{
-        type: "text",
-        text: item.name + " x " + item.quantity.toString(),
-        size: "sm",
-        color: "#555555",
-        flex: 1,
-        wrap: true
-      },{
-        type: "text",
-        text: `Rp${formatNumber(price)}`,
-        size: "sm",
-        color: "#111111",
-        flex: 0,
-        align: "end"
-      }];
+      const arrayItem = [
+        {
+          type: "text",
+          text: item.name + " x " + item.quantity.toString(),
+          size: "sm",
+          color: "#555555",
+          flex: 1,
+          wrap: true,
+        },
+        {
+          type: "text",
+          text: `Rp${formatNumber(price)}`,
+          size: "sm",
+          color: "#111111",
+          flex: 0,
+          align: "end",
+        },
+      ];
       const container = {
         type: "box",
         layout: "horizontal",
-        contents: arrayItem
+        contents: arrayItem,
       };
       array.push(container);
       if (item.desc !== "") {
-        const descriptionContent = [{
-          type: "text",
-          text: item.desc,
-          size: "xs",
-          color: "#555555",
-          maxLines: 3,
-          wrap: true,
-          style: "italic"
-        }];
+        const descriptionContent = [
+          {
+            type: "text",
+            text: item.desc,
+            size: "xs",
+            color: "#555555",
+            maxLines: 3,
+            wrap: true,
+            style: "italic",
+          },
+        ];
         const descriptionContainer = {
           type: "box",
           layout: "vertical",
           contents: descriptionContent,
-          margin: "none"
+          margin: "none",
         };
         array.push(descriptionContainer);
       }
     });
     template.body.contents[4].contents = array;
     template.body.contents[6].contents[1].text = total.quantity.toString();
-    template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
+    template.body.contents[7].contents[1].text = `Rp${formatNumber(
+      total.price
+    )}`;
     return template;
-  }
+  };
 
   const formatNumber = (number) => {
     const num = number.toString();
@@ -171,7 +196,7 @@ const CheckoutLayout = () => {
     if (length >= 3) {
       const mod = length % 3;
       if (mod > 0) {
-        return num.substring(0, mod+1) + "." + num.substring(mod+1);
+        return num.substring(0, mod + 1) + "." + num.substring(mod + 1);
       } else if (length / 3 === 1) {
         return num.substring(0, 1) + "." + num.substring(1);
       } else {
@@ -216,25 +241,14 @@ const CheckoutLayout = () => {
           className={classes.button}
           onClick={handleConfirm}
         >
-          {loading ? <CircularProgress size={24} color="white" /> : "Konfirmasi Pesanan"}
+          {loading ? (
+            <CircularProgress size={24} color="white" />
+          ) : (
+            "Konfirmasi Pesanan"
+          )}
         </Button>
       </Box>
       <Notifications error={error} />
-      {/* <Snackbar
-        open={open}
-        autoHideDuration={5000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleClose}
-      >
-        {
-          <Alert
-            onClose={handleClose}
-            severity={error.status ? "error" : "success"}
-          >
-            {error.status ? error.message : "Sukses! Data berhasil disimpan"}
-          </Alert>
-        }
-      </Snackbar> */}
     </>
   );
 };

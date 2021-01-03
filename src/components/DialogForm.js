@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Dialog,
@@ -11,7 +11,9 @@ import Form from "./Form";
 import { FormContext } from "../provider/FormProvider";
 
 const DialogForm = () => {
-  const { openDialog, item, items, ids, notification, totals } = useContext(FormContext);
+  const { openDialog, item, items, ids, notification, totals } = useContext(
+    FormContext
+  );
   const [open, setOpen] = openDialog;
   const [editedItem, setEditedItem] = item;
   const [itemArray, setItemArray] = items;
@@ -19,19 +21,19 @@ const DialogForm = () => {
   const [status, setStatus] = notification;
   const [total, setTotal] = totals;
 
-  /* useEffect(() => {
-    if (open) {
-      setOpen(true);
-    }
-  }, [open, setOpen]); */
-
   const handleClose = () => {
     setOpen(false);
     if (editedItem.quantity > 0) {
       if (!idArray.includes(editedItem.id)) {
-    const quantity = total.quantity > 0 ? Number(total.quantity) - Number(editedItem.quantity) : 0;
-    const price = total.price > 0 ? Number(total.price) - (editedItem.price * editedItem.quantity) : 0;
-    setTotal({...total, price, quantity});
+        const quantity =
+          total.quantity > 0
+            ? Number(total.quantity) - Number(editedItem.quantity)
+            : 0;
+        const price =
+          total.price > 0
+            ? Number(total.price) - editedItem.price * editedItem.quantity
+            : 0;
+        setTotal({ ...total, price, quantity });
       }
     }
     setTimeout(() => {
@@ -43,12 +45,12 @@ const DialogForm = () => {
         price: 0,
         desc: "",
       });
-    }, 100)
+    }, 100);
   };
 
   const handleAdd = () => {
     const array = [...itemArray];
-    let message = ""
+    let message = "";
     if (idArray.includes(editedItem.id)) {
       const index = idArray.indexOf(editedItem.id);
       if (editedItem.quantity === 0) {
@@ -56,12 +58,12 @@ const DialogForm = () => {
         message = "Barang berhasil dihapus dari keranjang";
       } else {
         array.splice(index, 1, editedItem);
-        message = "Data berhasil diubah"
+        message = "Data berhasil diubah";
       }
     } else {
       array.push(editedItem);
       setIdArray([...idArray, editedItem.id]);
-      message = "Barang berhasil ditambahkan ke keranjang"
+      message = "Barang berhasil ditambahkan ke keranjang";
     }
     setItemArray(array);
     setOpen(false);
@@ -75,8 +77,8 @@ const DialogForm = () => {
     });
     // setTotal({...total, })
     setTimeout(() => {
-      setStatus({...status, open: true, message})
-    }, 100)
+      setStatus({ ...status, open: true, message });
+    }, 100);
   };
 
   const formatNumber = (number) => {
@@ -85,7 +87,7 @@ const DialogForm = () => {
     if (length >= 3) {
       const mod = length % 3;
       if (mod > 0) {
-        return num.substring(0, mod+1) + "." + num.substring(mod+1);
+        return num.substring(0, mod + 1) + "." + num.substring(mod + 1);
       } else if (length / 3 === 1) {
         return num.substring(0, 1) + "." + num.substring(1);
       } else {
@@ -117,7 +119,9 @@ const DialogForm = () => {
     <Dialog fullWidth={true} maxWidth="lg" open={open} onClose={handleClose}>
       <DialogTitle>
         <Typography variant="h5">{editedItem.name}</Typography>
-        <Typography variant="h6">{`Rp${formatNumber(Number(editedItem.price))}`}</Typography>
+        <Typography variant="h6">{`Rp${formatNumber(
+          Number(editedItem.price)
+        )}`}</Typography>
       </DialogTitle>
       <DialogContent>
         <Form />
@@ -126,7 +130,11 @@ const DialogForm = () => {
         <Button onClick={handleClose} color="primary">
           Batal
         </Button>
-        <Button onClick={handleAdd} disabled={editedItem.quantity === 0} color="primary">
+        <Button
+          onClick={handleAdd}
+          disabled={editedItem.quantity === 0}
+          color="primary"
+        >
           Simpan
         </Button>
       </DialogActions>

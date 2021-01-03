@@ -17,7 +17,7 @@ const Form = () => {
     const price = Number(total.price) + Number(editedItem.price);
     const quantityTotal = Number(total.quantity) + 1;
     setEditedItem(editedObject);
-    setTotal({...total, price, quantity: quantityTotal})
+    setTotal({ ...total, price, quantity: quantityTotal });
   };
 
   const handleQuantityRemove = (event) => {
@@ -25,9 +25,8 @@ const Form = () => {
     const editedObject = { ...editedItem, quantity };
     const price = Number(total.price) - Number(editedItem.price);
     const quantityTotal = Number(total.quantity) - 1;
-    // const editedObject = { ...editedItem, quantity: Number(editedItem.quantity) - 1 };
     setEditedItem(editedObject);
-    setTotal({...total, price, quantity: quantityTotal})
+    setTotal({ ...total, price, quantity: quantityTotal });
   };
 
   const handleDesc = (event) => {
@@ -37,9 +36,7 @@ const Form = () => {
 
   return (
     <form noValidate autoComplete="off">
-      <Typography variant="body1">
-            Jumlah
-          </Typography>
+      <Typography variant="body1">Jumlah</Typography>
       <Grid
         container
         wrap="noWrap"
@@ -49,7 +46,13 @@ const Form = () => {
         className={classes.grid}
       >
         <Grid item xs={4}>
-          <Button fullWidth size="large" onClick={handleQuantityRemove} disabled={editedItem.quantity === 0} className={classes.button}>
+          <Button
+            fullWidth
+            size="large"
+            onClick={handleQuantityRemove}
+            disabled={editedItem.quantity === 0}
+            className={classes.button}
+          >
             <RemoveCircleOutlineIcon />
           </Button>
         </Grid>
@@ -64,18 +67,17 @@ const Form = () => {
           />
         </Grid>
         <Grid item xs={4}>
-          <Button fullWidth size="large" onClick={handleQuantityAdd} disabled={editedItem.quantity === 50} className={classes.button}>
+          <Button
+            fullWidth
+            size="large"
+            onClick={handleQuantityAdd}
+            disabled={editedItem.quantity === 50}
+            className={classes.button}
+          >
             <AddCircleOutlineIcon />
           </Button>
         </Grid>
       </Grid>
-      {/* <TextField
-        label="Quantity"
-        variant="outlined"
-        fullWidth={true}
-        value={editedItem.quantity}
-        onChange={handleQuantity}
-      /> */}
       <TextField
         label="Permintaan tambahan"
         variant="outlined"

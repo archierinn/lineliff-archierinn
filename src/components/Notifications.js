@@ -8,15 +8,8 @@ const Alert = (props) => <MuiAlert elevation={6} variant="filled" {...props} />;
 const Notifications = (props) => {
   const { notification } = useContext(FormContext);
   const [status, setStatus] = notification;
-  // const [open, setOpen] = useState(false)
-
-  /* useEffect(() => {
-        if (openNotification) {
-        }
-    }) */
-
   const handleClose = () => {
-    setStatus({...status, open: false});
+    setStatus({ ...status, open: false });
   };
   return (
     <Snackbar

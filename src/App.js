@@ -10,18 +10,17 @@ import { LoginProvider } from "./provider/LoginProvider";
 
 Axios.defaults.baseURL = process.env.REACT_APP_API;
 
-
 function App() {
   const classes = useStyles();
   return (
     <Router>
       <CssBaseline />
       <LoginProvider>
-      <Box className={classes.root}>
-        <FormProvider>
-          <Routes />
-        </FormProvider>
-      </Box>
+        <Box className={classes.root}>
+          <FormProvider>
+            <Routes />
+          </FormProvider>
+        </Box>
       </LoginProvider>
     </Router>
   );

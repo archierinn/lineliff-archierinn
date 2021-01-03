@@ -13,9 +13,6 @@ const Routes = () => {
       <Route exact path={["/", "/login"]}>
         <LoginLayout />
       </Route>
-      {/* <PrivateRoute exact path="/verify">
-        <Verify />
-      </PrivateRoute> */}
       <Route exact path="/verify">
         <Verify />
       </Route>
@@ -25,12 +22,6 @@ const Routes = () => {
       <PrivateRoute exact path="/order/checkout">
         <CheckoutLayout />
       </PrivateRoute>
-      {/* <Route exact path="/order">
-        <OrderLayout />
-      </Route>
-      <Route exact path="/order/checkout">
-        <CheckoutLayout />
-      </Route> */}
       <Route path="*">
         <NoMatch />
       </Route>

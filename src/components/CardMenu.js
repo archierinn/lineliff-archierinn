@@ -13,12 +13,12 @@ const CardMenu = (props) => {
   const { item_name, item_img, item_desc, item_price } = props.data;
 
   const handleOpen = (data) => {
-    let editItem = {}
+    let editItem = {};
     if (idArray.includes(data.item_id)) {
       const index = idArray.indexOf(data.item_id);
       editItem = {
         ...editedItem,
-        ...itemArray[index]
+        ...itemArray[index],
       };
     } else {
       editItem = {
@@ -26,7 +26,7 @@ const CardMenu = (props) => {
         id: data.item_id,
         name: data.item_name,
         type: data.item_type,
-        price: data.item_price
+        price: data.item_price,
       };
     }
     setEditedItem(editItem);
@@ -39,7 +39,7 @@ const CardMenu = (props) => {
     if (length >= 3) {
       const mod = length % 3;
       if (mod > 0) {
-        return num.substring(0, mod+1) + "." + num.substring(mod+1);
+        return num.substring(0, mod + 1) + "." + num.substring(mod + 1);
       } else if (length / 3 === 1) {
         return num.substring(0, 1) + "." + num.substring(1);
       } else {
@@ -81,10 +81,7 @@ const CardMenu = (props) => {
             >
               {item_desc}
             </Typography>
-            <Typography
-              paragraph={true}
-              className={classes.title}
-            >
+            <Typography paragraph={true} className={classes.title}>
               {`Rp${formatNumber(Number(item_price))}`}
             </Typography>
           </Box>

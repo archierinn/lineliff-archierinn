@@ -8,7 +8,7 @@ import Axios from "axios";
 const CardList = () => {
   const classes = useStyles();
   const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (!data) {
       Axios.get("/item")
@@ -25,17 +25,14 @@ const CardList = () => {
   return (
     <>
       <Box>
-      {loading ? <Box className={classes.box}>
-        <CircularProgress size={60} className={classes.loading} />
-        </Box> :
-        data && data.map((item, index) => <CardMenu key={index} data={item} />)}
-        {/* <CardMenu />
-        <CardMenu />
-        <CardMenu />
-        <CardMenu />
-        <CardMenu />
-        <CardMenu />
-        <CardMenu /> */}
+        {loading ? (
+          <Box className={classes.box}>
+            <CircularProgress size={60} className={classes.loading} />
+          </Box>
+        ) : (
+          data &&
+          data.map((item, index) => <CardMenu key={index} data={item} />)
+        )}
       </Box>
       <DialogForm />
     </>
@@ -49,11 +46,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "stretch",
     width: "100%",
-    flex: 1
+    flex: 1,
   },
   loading: {
-    marginTop: 8
-  }
+    marginTop: 8,
+  },
 }));
 
 export default CardList;

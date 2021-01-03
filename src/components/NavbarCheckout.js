@@ -1,11 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {
-  Toolbar,
-  IconButton,
-  Typography,
-  Paper,
-} from "@material-ui/core";
+import { Toolbar, IconButton, Typography, Paper } from "@material-ui/core";
 import ArrowBack from "@material-ui/icons/ArrowBack";
 import { FormContext } from "../provider/FormProvider";
 
@@ -14,8 +9,8 @@ const NavBarCheckout = () => {
   const { history } = useContext(FormContext);
 
   const handleBack = () => {
-    history.replace("/order")
-  }
+    history.replace("/order");
+  };
   return (
     <Paper elevation={1}>
       <Toolbar>

@@ -1,4 +1,4 @@
-import React, { createRef, useContext, useEffect, useState } from "react";
+import React, { createRef, useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Toolbar,
@@ -26,17 +26,8 @@ const NavBar = () => {
   const { history } = useContext(FormContext);
   const { profiles, login } = useContext(LoginContext);
   const [isLoggedIn, setIsLoggedIn] = login;
-  const [profile, setProfile] = profiles;
+  const [profile] = profiles;
   const isInClient = liff.isInClient();
-  // const isLoggedIn = liff.isLoggedIn();
-  /* useEffect(() => {
-    if (liff.isLoggedIn()) {
-      setIsLoggedIn(true)
-      liff.getProfile().then((res) => {
-        setProfile({...profile, name: res.displayName, img: res.pictureUrl, userId: res.userId})
-      })
-    }
-  }, []) */
 
   const handleClose = (event) => {
     if (
@@ -54,7 +45,6 @@ const NavBar = () => {
 
   const handleLogin = () => {
     liff.login();
-    // history.replace("/order");
   };
 
   const handleLogout = () => {
@@ -99,10 +89,10 @@ const NavBar = () => {
               Keluar
             </Button>
           ) : (
-              <Button color="inherit" onClick={handleLogin}>
-                Masuk
-              </Button>
-            )}
+            <Button color="inherit" onClick={handleLogin}>
+              Masuk
+            </Button>
+          )}
         </Toolbar>
       </Paper>
       <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose}>
@@ -115,10 +105,10 @@ const NavBar = () => {
               </Typography>
             </>
           ) : (
-              <Typography variant="h5" className={classes.displayName}>
-                AR Drink
-              </Typography>
-            )}
+            <Typography variant="h5" className={classes.displayName}>
+              AR Drink
+            </Typography>
+          )}
         </Box>
         <Divider />
         <List className={classes.list}>
@@ -135,11 +125,6 @@ const NavBar = () => {
               <ListItemText primary="Tutup aplikasi" />
             </ListItem>
           ) : null}
-          {/* {["Order", "Open in external browser"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
         </List>
       </Drawer>
     </>
@@ -159,8 +144,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "20vw",
     padding: 8,
-    [theme.breakpoints.down('sm')]: {
-      width: "50vw"
+    [theme.breakpoints.down("sm")]: {
+      width: "50vw",
     },
   },
   avatar: {
@@ -172,8 +157,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 4,
   },
   list: {
-    textAlign: "center"
-  }
+    textAlign: "center",
+  },
 }));
 
 export default NavBar;

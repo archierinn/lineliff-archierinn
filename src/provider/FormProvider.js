@@ -16,7 +16,7 @@ export const FormProvider = (props) => {
   const [itemArray, setItemArray] = useState([]);
   const [idArray, setIdArray] = useState([]);
   const [total, setTotal] = useState({ price: 0, quantity: 0 });
-  const [status, setStatus] = useState({open: false, message: ""});
+  const [status, setStatus] = useState({ open: false, message: "" });
   const history = useHistory();
 
   return (
