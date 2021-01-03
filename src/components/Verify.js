@@ -32,6 +32,8 @@ const Verify = () => {
                     }
                 })
             }).catch((err) => console.log(err))
+        } else {
+            history.replace("/order")
         }
     }, [])
 }
