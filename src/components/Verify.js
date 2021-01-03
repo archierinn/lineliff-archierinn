@@ -4,6 +4,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { FormContext } from "../provider/FormProvider";
 import qs from "qs";
 import liff from "@line/liff";
+import { LoginContext } from "../provider/LoginProvider";
 
 const axiosLine = Axios.create({
     baseURL: "https://api.line.me/oauth2/v2.1/"
