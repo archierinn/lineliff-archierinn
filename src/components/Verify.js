@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FormContext } from "../provider/FormProvider";
 import qs from "qs";
+import liff from "@line/liff";
 
 const axiosLine = Axios.create({
     baseURL: "https://api.line.me/oauth2/v2.1/"
@@ -18,7 +19,7 @@ const Verify = () => {
 
     useEffect(() => {
         if (query.get("code")) {
-            const body = qs.stringify({
+            /* const body = qs.stringify({
                 grant_type: "authorization_code",
                 code: query.get("code"),
                 redirect_uri: "https://lineliff-archierinn.herokuapp.com/verify",
@@ -36,7 +37,15 @@ const Verify = () => {
                     })
                 }
                 return true
-            }).catch((err) => console.log(err))
+            }).catch((err) => console.log(err)) */
+            const token = liff.getAccessToken();
+            if (token) {
+            axiosLine.get("/verify", { params: { access_token: token }}).then((resp) => {
+                if (resp.status === 200) {
+                    history.push("/order");
+                }
+                }).catch((err) => console.log(err))
+            }
         } else {
             //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
             setTimeout(() => history.replace("/order"), 1000);
