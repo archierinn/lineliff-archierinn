@@ -32,7 +32,9 @@ const CheckoutLayout = () => {
       id: profile.id,
       item: itemArray,
     };
-    Axios.post("/order/checkout", data)
+    const result = handleSendMessage(orderNumber, profile.name, itemArray, total);
+    console.log(result);
+    /* Axios.post("/order/checkout", data)
       .then((res) => {
         if (res.data.status) {
           if (isInClient) {
@@ -58,12 +60,6 @@ const CheckoutLayout = () => {
                 liff.logout();
                 liff.closeWindow();
               }, 3000);
-              /* if (isInClient) {
-                setTimeout(() => {
-                  liff.logout();
-                  liff.closeWindow();
-                }, 3000);
-              } */
             })
           } else {
           return Axios.get(
@@ -75,12 +71,6 @@ const CheckoutLayout = () => {
               setItemArray([]);
               setIdArray([]);
               setTotal({price: 0, quantity: 0});
-              /* if (liff.isInClient) {
-                setTimeout(() => {
-                  liff.logout();
-                  liff.closeWindow();
-                }, 3000);
-              } */
               history.replace("/order")
             } else {
               handleError();
@@ -95,7 +85,7 @@ const CheckoutLayout = () => {
       })
       .catch((err) => {
         handleError(err);
-      });
+      }); */
   };
 
   const handleError = (error = null) => {
@@ -126,6 +116,7 @@ const CheckoutLayout = () => {
 
   const handleSendMessage = (idOrder, profile, items, total) => {
     const template = JSON.parse(templateReceipt);
+    console.log(template);
     template.body.contents[0].contents[1].text = "#" + idOrder;
     template.body.contents[2].contents[1].text = profile;
     const array = [];
