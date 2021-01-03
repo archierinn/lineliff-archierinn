@@ -60,7 +60,7 @@ const DialogForm = () => {
       }
     } else {
       array.push(editedItem);
-      setIdArray(editedItem.id);
+      setIdArray([...idArray, editedItem.id]);
       message = "Barang berhasil ditambahkan ke keranjang"
     }
     setItemArray(array);
