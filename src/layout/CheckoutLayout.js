@@ -32,9 +32,7 @@ const CheckoutLayout = () => {
       id: profile.id,
       item: itemArray,
     };
-    const result = handleSendMessage(orderNumber, profile.name, itemArray, total);
-    console.log(result);
-    /* Axios.post("/order/checkout", data)
+    Axios.post("/order/checkout", data)
       .then((res) => {
         if (res.data.status) {
           if (isInClient) {
@@ -85,7 +83,7 @@ const CheckoutLayout = () => {
       })
       .catch((err) => {
         handleError(err);
-      }); */
+      });
   };
 
   const handleError = (error = null) => {
@@ -116,7 +114,6 @@ const CheckoutLayout = () => {
 
   const handleSendMessage = (idOrder, profile, items, total) => {
     const template = templateReceipt;
-    console.log(template);
     template.body.contents[0].contents[1].text = "#" + idOrder;
     template.body.contents[2].contents[1].text = profile;
     const array = [];
@@ -165,7 +162,7 @@ const CheckoutLayout = () => {
     template.body.contents[4].contents = array;
     template.body.contents[6].contents[1].text = total.quantity.toString();
     template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
-    return JSON.stringify(template);
+    return template;
   }
 
   const formatNumber = (number) => {
