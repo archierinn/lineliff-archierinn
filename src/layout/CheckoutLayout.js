@@ -115,7 +115,7 @@ const CheckoutLayout = () => {
   };
 
   const handleSendMessage = (idOrder, profile, items, total) => {
-    const template = JSON.parse(templateReceipt);
+    const template = templateReceipt;
     console.log(template);
     template.body.contents[0].contents[1].text = "#" + idOrder;
     template.body.contents[2].contents[1].text = profile;
