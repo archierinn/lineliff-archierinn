@@ -146,12 +146,12 @@ const ReviewLayout = () => {
         </Grid>
       </Grid>
       <Grid container wrap="noWrap" spacing={2} className={classes.itemList}>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <Typography variant="body1" className={classes.totalText}>
             JUMLAH HARGA
           </Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <Typography variant="body1" className={classes.totalPriceText}>
           {`Rp${formatNumber(Number(total.price))}`}
           </Typography>
