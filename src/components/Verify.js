@@ -16,6 +16,8 @@ const useQuery = () => {
 const Verify = () => {
     const query = useQuery();
     const { history } = useContext(FormContext);
+    const { login } = useContext(LoginContext);
+    const [, setIsLoggedIn] = login;
 
     useEffect(() => {
         if (query.get("code")) {
@@ -39,7 +41,8 @@ const Verify = () => {
                 return true
             }).catch((err) => console.log(err)) */
             const token = liff.getAccessToken();
-            setTimeout(() => history.replace("/order"), 1000);
+            setIsLoggedIn(true);
+            setTimeout(() => history.replace("/order"), 100);
             /* if (token) {
             axiosLine.get("/verify", { params: { access_token: token }}).then((resp) => {
                 if (resp.status === 200) {
@@ -49,7 +52,8 @@ const Verify = () => {
             } */
         } else {
             //window.location.href("https://lineliff-archierinn.herokuapp.com/order");
-            setTimeout(() => history.replace("/order"), 1000);
+            setIsLoggedIn(true);
+            setTimeout(() => history.replace("/order"), 100);
         }
     }, []);
     return (
