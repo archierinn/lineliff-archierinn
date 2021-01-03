@@ -43,7 +43,7 @@ const CheckoutLayout = () => {
             {
               type: 'flex',
               altText: 'Receipt',
-              contents: JSON.parse(result)
+              contents: result
             }
           ])
             .then(() => {
@@ -167,7 +167,7 @@ const CheckoutLayout = () => {
     template.body.contents[4].contents = array;
     template.body.contents[6].contents[1].text = total.quantity.toString();
     template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
-    return JSON.stringify(template);
+    return template;
   }
 
   const formatNumber = (number) => {
