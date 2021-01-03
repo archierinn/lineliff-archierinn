@@ -105,7 +105,7 @@ const NavBar = () => {
             )}
         </Toolbar>
       </Paper>
-      <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose} className={classes.drawer}>
+      <Drawer ref={dialog} anchor="left" open={open} onClose={handleClose}>
         <Box className={classes.profile}>
           {isLoggedIn ? (
             <>
@@ -171,9 +171,6 @@ const useStyles = makeStyles((theme) => ({
   displayName: {
     padding: 4,
   },
-  drawer: {
-    width: "30vw"
-  }
 }));
 
 export default NavBar;

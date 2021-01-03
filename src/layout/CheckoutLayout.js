@@ -12,7 +12,7 @@ import templateReceipt from "../json/templateReceipt.json";
 
 const CheckoutLayout = () => {
   const classes = useStyles();
-  const { items, ids, totals, notification } = useContext(FormContext);
+  const { items, ids, totals, notification, history } = useContext(FormContext);
   const [itemArray, setItemArray] = items;
   const [total, setTotal] = totals;
   const [idArray, setIdArray] = ids;
@@ -21,6 +21,7 @@ const CheckoutLayout = () => {
   const [profile] = profiles;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState({ status: false, message: "" });
+  const isInClient = liff.isInClient();
 
   const handleConfirm = () => {
     setLoading(true);
@@ -34,6 +35,7 @@ const CheckoutLayout = () => {
     Axios.post("/order/checkout", data)
       .then((res) => {
         if (res.data.status) {
+          if (isInClient) {
           const result = handleSendMessage(orderNumber, profile.name, itemArray, total);
           return liff.sendMessages([
             {
@@ -52,15 +54,19 @@ const CheckoutLayout = () => {
               setItemArray([]);
               setIdArray([]);
               setTotal({price: 0, quantity: 0});
-              if (liff.isInClient) {
+              setTimeout(() => {
+                liff.logout();
+                liff.closeWindow();
+              }, 3000);
+              /* if (isInClient) {
                 setTimeout(() => {
                   liff.logout();
                   liff.closeWindow();
                 }, 3000);
-              }
-              return;
+              } */
             })
-          /* return Axios.get(
+          } else {
+          return Axios.get(
             "/pushorder/" + profile.userId + "?id=" + res.data.data
           ).then((res) => {
             if (res.data.status) {
@@ -69,18 +75,19 @@ const CheckoutLayout = () => {
               setItemArray([]);
               setIdArray([]);
               setTotal({price: 0, quantity: 0});
-              if (liff.isInClient) {
+              /* if (liff.isInClient) {
                 setTimeout(() => {
                   liff.logout();
                   liff.closeWindow();
                 }, 3000);
-              }
-              return;
+              } */
+              history.replace("/order")
             } else {
               handleError();
               return;
             }
-          }); */
+          });
+          }
         } else {
           handleError();
           return;
@@ -118,7 +125,6 @@ const CheckoutLayout = () => {
   };
 
   const handleSendMessage = (idOrder, profile, items, total) => {
-    try {
     const template = JSON.parse(templateReceipt);
     template.body.contents[0].contents[1].text = "#" + idOrder;
     template.body.contents[2].contents[1].text = profile;
@@ -168,10 +174,7 @@ const CheckoutLayout = () => {
     template.body.contents[4].contents = array;
     template.body.contents[6].contents[1].text = total.quantity.toString();
     template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
-    return template;
-    } catch (error) {
-      console.log(error)
-    }
+    return JSON.stringify(template);
   }
 
   const formatNumber = (number) => {
