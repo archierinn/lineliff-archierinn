@@ -40,7 +40,7 @@ const CheckoutLayout = () => {
           return liff.sendMessages([
             {
               type: 'text',
-              text: 'Pelanggan ' + profile.name +'\n\nTerima kasih sudah memesan. Berikut nota pemesanan Anda'
+              text: 'Pelanggan ' + profile.name +',\n\nTerima kasih sudah memesan. Berikut nota pemesanan Anda'
             },
             {
               type: 'flex',

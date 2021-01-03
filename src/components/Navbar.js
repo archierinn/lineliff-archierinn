@@ -93,7 +93,7 @@ const NavBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            Order Makan
+            Order Minum
           </Typography>
           {isInClient ? null : isLoggedIn ? (
             <Button color="inherit" onClick={handleLogout}>
@@ -158,7 +158,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-around",
     alignItems: "center",
-    width: "30vw",
+    width: "20vw",
     padding: 8,
     [theme.breakpoints.down('sm')]: {
       width: "50vw"
