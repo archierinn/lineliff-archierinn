@@ -11,9 +11,10 @@ import liff from "@line/liff";
 
 const CheckoutLayout = () => {
   const classes = useStyles();
-  const { items, totals, notification } = useContext(FormContext);
-  const [itemArray] = items;
-  const [total] = totals;
+  const { items, ids, totals, notification } = useContext(FormContext);
+  const [itemArray, setItemArray] = items;
+  const [total, setTotal] = totals;
+  const [idArray, setIdArray] = ids;
   const [status, setStatus] = notification;
   const { profiles } = useContext(LoginContext);
   const [profile] = profiles;
@@ -37,7 +38,10 @@ const CheckoutLayout = () => {
           ).then((res) => {
             if (res.data.status) {
               setLoading(false);
-              setStatus({...status, open: true, message: "Data berhasil disimpan"})
+              setStatus({...status, open: true, message: "Data berhasil disimpan"});
+              setItemArray([]);
+              setIdArray([]);
+              setTotal({price: 0, quantity: 0});
               if (liff.isInClient) {
                 setTimeout(() => {
                   liff.closeWindow();

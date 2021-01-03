@@ -4,10 +4,7 @@ import { Button, Box, Typography } from "@material-ui/core";
 import NavBar from "../components/Navbar";
 import CardList from "../components/CardList";
 import { FormContext } from "../provider/FormProvider";
-// import Axios from "axios";
-import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
-// import liff from "@line/liff";
 import { useLocation } from "react-router-dom";
 
 const useQuery = () => {
@@ -16,30 +13,16 @@ const useQuery = () => {
 
 const OrderLayout = () => {
   const classes = useStyles();
-  const { totals, items, history } = useContext(FormContext);
-  const { profiles } = useContext(LoginContext);
-  const [total] = totals;
-  const [itemArray] = items;
-  const [profile, setProfile] = profiles;
-  // const token = liff.getIDToken();
-  // const query = useQuery();
+  const { totals, items, ids, history } = useContext(FormContext);
+  const [total, setTotal] = totals;
+  const [itemArray, setItemArray] = items;
+  const [, setIdArray] = ids;
 
-  // if (query.get(""))
-
-  /* useEffect(() => {
-    // liff.init({ liffId: process.env.REACT_APP_LINE_LIFF_ID }).then(() => {
-      if (liff.isLoggedIn()) {
-      if (profile.id === "") {
-        liff.getProfile().then((res) => {
-          return Axios.post("/login", res.userId).then((res) => {
-            setProfile({ ...profile, id: res.data.data });
-            return
-          });
-        })
-      }
-    }
-    // })
-  }, []); */
+  useEffect(() => {
+    setTotal({price: 0, quantity: 0});
+    setItemArray([]);
+    setIdArray([]);
+  }, [])
 
   const handleNext = () => {
     history.push("/order/checkout");
