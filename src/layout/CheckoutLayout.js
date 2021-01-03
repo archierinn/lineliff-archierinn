@@ -47,17 +47,18 @@ const CheckoutLayout = () => {
               altText: 'Receipt',
               contents: result
             }
-          ])
-            .then(() => {
+          ]).then(() => {
               setLoading(false);
               setStatus({...status, open: true, message: "Data berhasil disimpan"});
               setItemArray([]);
               setIdArray([]);
               setTotal({price: 0, quantity: 0});
-              setTimeout(() => {
+              return setTimeout(() => {
+                // if (isInClient) {
                 liff.logout();
                 liff.closeWindow();
-              }, 3000);
+                // }
+              }, 1000);
             })
           } else {
           return Axios.get(
