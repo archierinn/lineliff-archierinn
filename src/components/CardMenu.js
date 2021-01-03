@@ -5,19 +5,30 @@ import { FormContext } from "../provider/FormProvider";
 
 const CardMenu = (props) => {
   const classes = useStyles();
-  const { openDialog, item } = useContext(FormContext);
+  const { openDialog, item, items, ids } = useContext(FormContext);
   const [, setOpen] = openDialog;
   const [editedItem, setEditedItem] = item;
+  const [idArray] = ids;
+  const [itemArray] = items;
   const { item_name, item_img, item_desc, item_price } = props.data;
 
   const handleOpen = (data) => {
-    const editItem = {
-      ...editedItem,
-      id: data.item_id,
-      name: data.item_name,
-      type: data.item_type,
-      price: data.item_price
-    };
+    let editItem = {}
+    if (idArray.includes(data.item_id)) {
+      const index = idArray.indexOf(data.item_id);
+      editItem = {
+        ...editedItem,
+        ...itemArray[index]
+      };
+    } else {
+      editItem = {
+        ...editedItem,
+        id: data.item_id,
+        name: data.item_name,
+        type: data.item_type,
+        price: data.item_price
+      };
+    }
     setEditedItem(editItem);
     setTimeout(() => setOpen(true), 100);
   };
