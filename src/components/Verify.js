@@ -36,6 +36,10 @@ const Verify = () => {
             history.replace("/order")
         }
     }, [])
+    return (
+        <>
+        </>
+    )
 }
 
 export default Verify;
