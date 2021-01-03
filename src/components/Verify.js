@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { FormContext } from "../provider/FormProvider";
 
 const axiosLine = Axios.create({
-    baseURL: "https://api.line.me/oauth2/v2.1/"
+    baseURL: "https://api.line.me/v2/oauth/"
 });
 
 const useQuery = () => {
@@ -24,12 +24,12 @@ const Verify = () => {
                 client_id: process.env.REACT_APP_LINE_CLIENT_ID,
                 client_secret: process.env.REACT_APP_LINE_CLIENT_SECRET
             }
-            axiosLine.post("/token", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
+            axiosLine.post("/accessToken", body, { headers: { "Content-Type" : "application/x-www-form-urlencoded"}}).then((res) => {
                 // sessionStorage.setItem("token", res.data.access_token)
                 if (res.status === 200) {
                 return axiosLine.get("/verify", { params: { access_token: res.data.access_token }}).then((resp) => {
                         if (resp.status === 200) {
-                            history.replace("/order");
+                            history.push("/order");
                         }
                         return true
                     })
@@ -37,7 +37,7 @@ const Verify = () => {
                 return true
             }).catch((err) => console.log(err))
         } else {
-            history.replace("/order");
+            history.push("/order");
         }
     // }, []);
     return (

@@ -8,6 +8,7 @@ import { FormContext } from "../provider/FormProvider";
 import { LoginContext } from "../provider/LoginProvider";
 import Notifications from "../components/Notifications";
 import liff from "@line/liff";
+import templateReceipt from "../json/templateReceipt.json";
 
 const CheckoutLayout = () => {
   const classes = useStyles();
@@ -33,7 +34,33 @@ const CheckoutLayout = () => {
     Axios.post("/order/checkout", data)
       .then((res) => {
         if (res.data.status) {
-          return Axios.get(
+          const result = handleSendMessage(orderNumber, profile.name, itemArray, total);
+          return liff.sendMessages([
+            {
+              type: 'text',
+              text: 'Pelanggan ' + profile.name +'\n\nTerima kasih sudah memesan. Berikut nota pemesanan Anda'
+            },
+            {
+              type: 'flex',
+              altText: 'Receipt',
+              contents: JSON.parse(result)
+            }
+          ])
+            .then(() => {
+              setLoading(false);
+              setStatus({...status, open: true, message: "Data berhasil disimpan"});
+              setItemArray([]);
+              setIdArray([]);
+              setTotal({price: 0, quantity: 0});
+              if (liff.isInClient) {
+                setTimeout(() => {
+                  liff.logout();
+                  liff.closeWindow();
+                }, 3000);
+              }
+              return;
+            })
+          /* return Axios.get(
             "/pushorder/" + profile.userId + "?id=" + res.data.data
           ).then((res) => {
             if (res.data.status) {
@@ -53,7 +80,7 @@ const CheckoutLayout = () => {
               handleError();
               return;
             }
-          });
+          }); */
         } else {
           handleError();
           return;
@@ -88,6 +115,93 @@ const CheckoutLayout = () => {
       (date.getMonth() + 1).toString().padStart(2, "0") +
       random
     );
+  };
+
+  const handleSendMessage = (idOrder, profile, items, total) => {
+    const template = JSON.parse(templateReceipt);
+    template.body.contents[0].contents[1].text = "#" + idOrder;
+    template.body.contents[2].contents[1].text = profile;
+    const array = [];
+    items.forEach((item) => {
+      const price = Number(item.price) * Number(item.quantity);
+      const arrayItem = [{
+        type: "text",
+        text: item.name + " x " + item.quantity.toString(),
+        size: "sm",
+        color: "#555555",
+        flex: 1,
+        wrap: true
+      },{
+        type: "text",
+        text: `Rp${formatNumber(price)}`,
+        size: "sm",
+        color: "#111111",
+        flex: 0,
+        align: "end"
+      }];
+      const container = {
+        type: "box",
+        layout: "horizontal",
+        contents: arrayItem
+      };
+      array.push(container);
+      if (item.desc !== "") {
+        const descriptionContent = [{
+          type: "text",
+          text: item.desc,
+          size: "xs",
+          color: "#555555",
+          maxLines: 3,
+          wrap: true,
+          style: "italic"
+        }];
+        const descriptionContainer = {
+          type: "box",
+          layout: "vertical",
+          contents: descriptionContent,
+          margin: "none"
+        };
+        array.push(descriptionContainer);
+      }
+    });
+    template.body.contents[4].contents = array;
+    template.body.contents[6].contents[1].text = total.quantity.toString();
+    template.body.contents[7].contents[1].text = `Rp${formatNumber(total.price)}`;
+    return JSON.stringify(template);
+  }
+
+  const formatNumber = (number) => {
+    const num = number.toString();
+    const length = num.length - 1;
+    if (length >= 3) {
+      const mod = length % 3;
+      if (mod > 0) {
+        return num.substring(0, mod+1) + "." + num.substring(mod+1);
+      } else if (length / 3 === 1) {
+        return num.substring(0, 1) + "." + num.substring(1);
+      } else {
+        let i = 0;
+        let output = "";
+        while (i < length / 3) {
+          const index = i * 3;
+          if (index === 0) {
+            output += num.substring(0, 1) + "." + num.substring(1, 3);
+          } else if (i + 1 === length / 3) {
+            output +=
+              num.substring(index, index + 1) + "." + num.substring(index + 1);
+          } else {
+            output +=
+              num.substring(index, index + 1) +
+              "." +
+              num.substring(index + 1, index + 3);
+          }
+          i++;
+        }
+        return output;
+      }
+    } else {
+      return num;
+    }
   };
 
   return (

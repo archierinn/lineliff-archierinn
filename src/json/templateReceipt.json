@@ -1,0 +1,120 @@
+{
+    "type": "bubble",
+    "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "RECEIPT",
+                        "size": "sm",
+                        "color": "#1DB446",
+                        "weight": "bold"
+                    },
+                    {
+                        "type": "text",
+                        "text": "",
+                        "align": "end",
+                        "color": "#1DB446",
+                        "weight": "bold"
+                    }
+                ]
+            },
+            {
+                "type": "text",
+                "text": "AR DRINK",
+                "weight": "bold",
+                "size": "xxl",
+                "margin": "md"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "Customer:",
+                        "size": "sm",
+                        "flex": 0
+                    },
+                    {
+                        "type": "text",
+                        "text": "",
+                        "align": "start",
+                        "size": "sm",
+                        "margin": "sm"
+                    }
+                ]
+            },
+            {
+                "type": "separator",
+                "margin": "lg"
+            },
+            {
+                "type": "box",
+                "layout": "vertical",
+                "margin": "xxl",
+                "spacing": "sm",
+                "contents": [
+                ]
+            },
+            {
+                "type": "separator",
+                "margin": "xxl"
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "margin": "xxl",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "ITEMS",
+                        "size": "sm",
+                        "color": "#555555",
+                        "flex": 1
+                    },
+                    {
+                        "type": "text",
+                        "text": "",
+                        "size": "sm",
+                        "color": "#111111",
+                        "align": "end",
+                        "flex": 0
+                    }
+                ]
+            },
+            {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                    {
+                        "type": "text",
+                        "text": "TOTAL",
+                        "size": "sm",
+                        "color": "#555555",
+                        "flex": 1
+                    },
+                    {
+                        "type": "text",
+                        "text": "",
+                        "size": "sm",
+                        "color": "#111111",
+                        "align": "end",
+                        "flex": 0,
+                        "weight": "bold"
+                    }
+                ]
+            }
+        ]
+    },
+    "styles": {
+        "footer": {
+            "separator": true
+        }
+    }
+}
